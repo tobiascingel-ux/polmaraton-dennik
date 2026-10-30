@@ -1,0 +1,4343 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Polmaratón – Tréningový denník</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0c0c0e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Polmaratón">
+<meta property="og:title" content="Polmaratón – Tréningový denník">
+<meta property="og:description" content="Život, ktorý hľadám, sa skrýva v disciplíne, ktorú odmietam. 12 mesiacov systematickej prípravy. Jeden cieľ.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://polmaraton-dennik.vercel.app/">
+<meta property="og:image" content="https://polmaraton-dennik.vercel.app/og-image.png">
+<meta property="og:image:secure_url" content="https://polmaraton-dennik.vercel.app/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Polmaratón – Tréningový denník">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Polmaratón – Tréningový denník">
+<meta name="twitter:description" content="Život, ktorý hľadám, sa skrýva v disciplíne, ktorú odmietam. 12 mesiacov systematickej prípravy. Jeden cieľ.">
+<meta name="twitter:image" content="https://polmaraton-dennik.vercel.app/og-image.png">
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<style>
+  /* ==========================================================================
+     TYPOGRAFIA — DISPLAAY TYPE FOUNDRY
+     Primárne písmo: Avantt (moderný grotesk / sans-serif)
+     Sekundárne písmo: Tobias (autorský serif / antikva)
+     ========================================================================== */
+  @font-face {
+    font-family: 'Avantt';
+    src: url('AvanttTRIAL-Font/AvanttTRIAL-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avantt';
+    src: url('AvanttTRIAL-Font/AvanttTRIAL-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avantt';
+    src: url('AvanttTRIAL-Font/AvanttTRIAL-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avantt';
+    src: url('AvanttTRIAL-Font/AvanttTRIAL-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Tobias';
+    src: url('TobiasTRIAL-Font/TobiasTRIAL-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tobias';
+    src: url('TobiasTRIAL-Font/TobiasTRIAL-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tobias';
+    src: url('TobiasTRIAL-Font/TobiasTRIAL-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tobias';
+    src: url('TobiasTRIAL-Font/TobiasTRIAL-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* ==========================================================================
+     FAREBNÁ SCHÉMA — INVERTOVANÁ / DISPLAAY MONOCHROME
+     ========================================================================== */
+  :root {
+    --bg: #0c0c0e;
+    --card-bg: #141417;
+    --card-bg-sub: #1b1b20;
+    --card-hover: #222228;
+    --border: #26262c;
+    --border-light: #32323a;
+    --border-contrast: #ffffff;
+    --text-primary: #f5f5f7;
+    --text-secondary: #9a9aa2;
+    --text-muted: #6e6e76;
+    --white: #ffffff;
+    --black: #0c0c0e;
+    --font-primary: 'Avantt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-secondary: 'Tobias', Georgia, serif;
+    --radius-pill: 9999px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+  }
+
+  html {
+    background-color: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    font-style: normal !important;
+    letter-spacing: normal;
+    word-spacing: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-size: 14.5px;
+    line-height: 1.55;
+    letter-spacing: normal;
+    word-spacing: normal;
+  }
+
+  .status-bar-cover {
+    display: none;
+  }
+
+  /* ==========================================================================
+     SEKUNDÁRNE PÍSMO TOBIAS — PROFESIONÁLNA TYPOGRAFICKÁ ÚPRAVA
+     - Prirodzený, štandardný word-spacing pre vyvážený rytmus viet a čitateľnosť
+     - Striktne bez kurzívy (font-style: normal)
+     - Opticky vyvážený tracking (letter-spacing: -0.005em) v duchu displaay.net
+     ========================================================================== */
+  .font-secondary,
+  .site-brand span,
+  .site-header-meta,
+  .hero-lead,
+  .metric-sub,
+  .section-subtitle,
+  .strip-day-sub,
+  .workout-note-block,
+  .milestone-desc,
+  .lib-block-meta,
+  #weekFocusText {
+    font-family: var(--font-secondary) !important;
+    word-spacing: normal !important;
+    letter-spacing: -0.005em;
+    font-style: normal !important;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .site-header-slot {
+    display: contents;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 48px 64px 104px 64px;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    position: relative;
+  }
+
+  /* Minimalistický Header v štýle Displaay / Workshop */
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 64px;
+    font-size: 13px;
+  }
+  .site-brand {
+    font-family: var(--font-secondary);
+    font-style: normal;
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-size: 13px;
+    letter-spacing: normal;
+  }
+  .site-header-meta {
+    font-family: var(--font-secondary);
+    font-style: normal;
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-size: 13px;
+    letter-spacing: normal;
+  }
+
+  /* Hero časť */
+  .hero {
+    position: relative;
+    margin-bottom: 48px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-title {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  .hero-lead {
+    font-family: var(--font-secondary);
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 780px;
+    margin-bottom: 32px;
+  }
+
+  /* Metriky cieľa */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+  }
+  .metric-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .metric-value {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-sub {
+    font-family: var(--font-secondary);
+    font-style: normal;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Minimalistický lineárny progress bar */
+  .progress-wrap {
+    margin-top: 8px;
+  }
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--white);
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Navigačné záložky v štýle pills / controls z displaay.net */
+  .nav-tabs-wrap {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .nav-pill {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .nav-pill:hover {
+    border-color: var(--border-light);
+    color: var(--text-primary);
+  }
+  .nav-pill.active {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--black);
+    font-weight: 600;
+  }
+  .mobile-nav-container {
+    display: none;
+  }
+
+  /* Sekcia bez bočného číslovania */
+  .content-section {
+    padding-top: 8px;
+  }
+  .section-header-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .section-title-wrap h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+  .section-subtitle {
+    font-family: var(--font-secondary);
+    font-size: 15px;
+    font-style: normal;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Controls pre týždeň */
+  .btn-controls-group {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-pill-sm {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 7px 16px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn-pill-sm:hover:not(:disabled) {
+    border-color: var(--white);
+    background: var(--card-bg-sub);
+  }
+  .btn-pill-sm:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* Doplnkové behy hlavička a spacing */
+  .extras-section-block {
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    margin-top: 48px;
+  }
+  .extras-header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    margin-bottom: 8px;
+  }
+  .extras-header-wrap h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+  .extras-header-wrap #btnAddExtra {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 8px 18px;
+  }
+  .extras-lead {
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  /* Karta doplnkového behu a ovládacie prvky */
+  .extra-workout-card {
+    margin-bottom: 16px;
+  }
+  .extra-card-head {
+    margin-bottom: 0;
+  }
+  .extra-card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .extra-card-top-row .workout-meta-tag {
+    margin-bottom: 0;
+  }
+  .extra-card-name-wrap {
+    width: 100%;
+  }
+  .extra-name-input {
+    width: 100%;
+    max-width: 380px;
+    height: 38px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .btn-extra-del {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 11.5px;
+    font-weight: 500;
+    font-family: var(--font-primary);
+    padding: 4px 12px;
+    height: 26px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-extra-del:hover {
+    color: var(--text-primary);
+    border-color: var(--white);
+    background: var(--card-bg-sub);
+  }
+  .btn-extra-del:active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--white);
+    color: var(--text-primary);
+  }
+
+  /* Strip týždňa */
+  .week-strip {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .strip-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .strip-item:hover {
+    border-color: var(--border-light);
+    background: var(--card-bg-sub);
+  }
+  .strip-item.today {
+    border-color: var(--white);
+  }
+  .strip-item.done {
+    background: #191b22;
+    border-color: #323746;
+  }
+  .strip-day-name {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+  .strip-day-status {
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .strip-item.done .strip-day-status {
+    color: var(--white);
+  }
+  .strip-day-status svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+  .strip-day-sub {
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Tréningová karta */
+  .workout-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.15s ease;
+  }
+  .workout-card.done {
+    border-color: var(--border-light);
+  }
+  .workout-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .workout-meta-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .workout-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+  .workout-params-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+  }
+  .workout-params-row strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Minimalistický checkmark indikátor so šípkou */
+  .custom-checkbox-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--card-bg-sub);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: all 0.15s ease;
+    color: var(--text-muted);
+  }
+  .custom-checkbox-wrap:hover {
+    border-color: var(--white);
+    color: var(--text-primary);
+  }
+  .custom-checkbox-wrap.checked {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--black);
+  }
+  .custom-checkbox-wrap input[type="checkbox"] {
+    display: none;
+  }
+  .custom-checkbox-wrap svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  /* Rozpis častí tréningu */
+  .workout-sub-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 18px 0;
+  }
+  .sub-block-box {
+    background: var(--card-bg-sub);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+  .sub-block-box h4 {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .sub-block-box ul {
+    list-style: none;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .sub-block-box li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 26px; /* bezpečné odsadenie pre pomlčku */
+    line-height: 1.5;
+  }
+  .sub-block-box li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 14px;
+    color: var(--text-muted);
+  }
+
+  .workout-note-block {
+    font-family: var(--font-secondary);
+    font-style: normal;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    border-left: 1px solid var(--white);
+    padding-left: 14px;
+    margin: 14px 0;
+    line-height: 1.55;
+  }
+
+  /* ==========================================================================
+     LOG FORMULÁR — DOKONALÉ HORIZONTÁLNE ZAROVNANIE VSTUPOV
+     ========================================================================== */
+  .log-panel-wrap {
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+    margin-top: 18px;
+  }
+  .log-panel-wrap.is-non-run {
+    padding-top: 14px;
+    margin-top: 14px;
+  }
+  .log-panel-wrap.is-non-run .field-notes-col {
+    margin-bottom: 0;
+  }
+  .log-inputs-grid:empty {
+    display: none;
+    margin: 0;
+    padding: 0;
+  }
+  .log-inputs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-end; /* VŠETKY VSTUPY SÚ NA IDENTICKEJ ZÁKLADNEJ LÍNII */
+  }
+  .field-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field-label-fixed {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    height: 16px;
+    line-height: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .field-input-box {
+    height: 38px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0 12px;
+    font-size: 13.5px;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    transition: border-color 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .field-input-box:focus {
+    border-color: var(--white);
+  }
+  .field-pace-display {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: var(--text-primary);
+    padding: 0 4px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    font-family: var(--font-primary);
+  }
+  .field-pace-display strong {
+    color: var(--text-primary);
+    font-size: 13.5px;
+    font-weight: 400;
+    font-family: inherit;
+    margin-left: 5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  textarea.field-input-box {
+    field-sizing: content;
+    height: auto;
+    min-height: 52px;
+    padding: 10px 12px;
+    line-height: 1.45;
+    resize: none;
+    overflow-y: hidden;
+  }
+
+  /* Screenshot upload tlačidlo a náhľad */
+  .upload-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 7px 16px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.15s ease;
+  }
+  .upload-pill:hover {
+    border-color: var(--white);
+    background: var(--card-bg-sub);
+  }
+  .upload-pill input {
+    display: none;
+  }
+  .attachment-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .attachment-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .attachment-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg-sub);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .attachment-check-svg {
+    stroke: var(--white);
+    flex-shrink: 0;
+  }
+  .attachment-text {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .attachment-btn-view {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 11.5px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    padding: 0 4px;
+    margin-left: 2px;
+  }
+  .attachment-btn-view:hover {
+    color: var(--text-primary);
+  }
+  .attachment-btn-del {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .attachment-btn-del:hover {
+    color: var(--white);
+  }
+
+  /* Strava link integrácia */
+  .strava-import-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .strava-input {
+    flex: 1;
+    font-size: 13px !important;
+  }
+  .btn-strava-sync {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 0 16px;
+    height: 38px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+  .btn-strava-sync:hover {
+    border-color: var(--white);
+    background: var(--card-bg-sub);
+  }
+  .btn-strava-sync:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .strava-attached-card {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: var(--card-bg-sub);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-top: 12px;
+  }
+  .strava-map-thumb {
+    width: 120px;
+    height: 70px;
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--bg);
+    cursor: zoom-in;
+    border: 1px solid var(--border);
+  }
+  .strava-map-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .strava-meta-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .strava-meta-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .strava-meta-sub {
+    font-family: var(--font-secondary);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .strava-meta-link {
+    display: inline-block;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-top: 4px;
+  }
+  .strava-meta-link:hover {
+    color: var(--white);
+  }
+
+  /* Desktop vs Mobile viditeľnosť */
+  .desktop-only {
+    display: block;
+  }
+  .mobile-only {
+    display: none !important;
+  }
+
+  /* Section Subheading – zjednotená typografická úroveň pre dáta a tabuľky */
+  .section-subheading {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin: 36px 0 12px 0;
+  }
+
+  /* Tabuľky v štýle Displaay — čistý, vzdušný layout bez orámovaných boxov */
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 10px 0 32px 0;
+  }
+  table.editorial-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    table-layout: fixed;
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+  }
+  table.editorial-table th, table.editorial-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    text-align: left;
+  }
+  table.editorial-table th:first-child, table.editorial-table td:first-child {
+    padding-left: 0;
+  }
+  table.editorial-table th:last-child, table.editorial-table td:last-child {
+    padding-right: 0;
+  }
+  table.editorial-table th {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 700;
+    border-top: 1px solid var(--border);
+    background: transparent;
+  }
+  table.editorial-table tr:last-child td {
+    border-bottom: 1px solid var(--border);
+  }
+  table.editorial-table td {
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-primary);
+    word-spacing: normal;
+  }
+  table.editorial-table td.secondary {
+    color: var(--text-secondary);
+    font-family: var(--font-primary);
+    word-spacing: normal;
+  }
+
+  /* 5-stĺpcový zjednotený grid s rovnakými rozostupmi (20% každý stĺpec) */
+  table.editorial-table.table-5col th,
+  table.editorial-table.table-5col td {
+    width: 20%;
+    text-align: left;
+  }
+
+  /* 3-stĺpcový zjednotený grid s rovnakými rozostupmi (33.333% každý stĺpec) */
+  table.editorial-table.table-3col th,
+  table.editorial-table.table-3col td {
+    width: 33.333%;
+    text-align: left;
+  }
+
+  /* 2-stĺpcový zjednotený grid pre Plánované míľniky prípravy (zladený s 5-stĺpcovým gridom) */
+  table.editorial-table.table-milestones th:nth-child(1),
+  table.editorial-table.table-milestones td:nth-child(1) {
+    width: 20%;
+    text-align: left;
+  }
+  table.editorial-table.table-milestones th:nth-child(2),
+  table.editorial-table.table-milestones td:nth-child(2) {
+    width: 80%;
+    text-align: left;
+  }
+  table.editorial-table.table-milestones td:nth-child(1) strong {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  table.editorial-table.table-milestones td:nth-child(2) {
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+
+  /* Filtre behov */
+  .runs-filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 14px 0 16px 0;
+  }
+  .filter-pill {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 5px 12px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: var(--font-primary);
+  }
+  .filter-pill:hover {
+    border-color: var(--white);
+    color: var(--text-primary);
+  }
+  .filter-pill.active {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  /* Delta týždňa */
+  .week-delta-meta {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .week-delta-meta strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .delta-tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--card-bg-sub);
+  }
+  .delta-tag.plus {
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  .delta-tag.minus {
+    color: var(--text-muted);
+  }
+
+  /* Monochromatické grafy prispôsobené na celú šírku */
+  .chart-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .chart-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .chart-eyebrow-sub {
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: normal;
+    text-transform: none;
+    opacity: 0.85;
+  }
+  .chart-scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #26262c transparent;
+    padding-bottom: 2px;
+  }
+  .chart-scroll-container::-webkit-scrollbar {
+    height: 3px;
+  }
+  .chart-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .chart-scroll-container::-webkit-scrollbar-thumb {
+    background: #26262c;
+    border-radius: 999px;
+  }
+  .chart-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .chart-svg text {
+    font-family: var(--font-primary);
+    font-style: normal !important;
+    user-select: none;
+  }
+
+  /* Hlavné tlačidlo akcie – jednotná veľkosť pre button aj label */
+  .btn-primary-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--white);
+    height: 44px;
+    padding: 0 24px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: opacity 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+    line-height: 1;
+    user-select: none;
+    font-family: var(--font-primary);
+  }
+  .btn-primary-action:hover {
+    opacity: 0.9;
+  }
+  .btn-primary-action.outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+  .btn-primary-action.outline:hover {
+    border-color: var(--white);
+  }
+
+  /* Míľniky */
+  .milestone-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .milestone-date {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .milestone-desc {
+    font-family: var(--font-secondary);
+    color: var(--text-secondary);
+  }
+
+  /* Bežecká obuv a výbava */
+  .gear-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .gear-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .gear-title-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .gear-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+  }
+  .gear-type {
+    font-family: var(--font-secondary);
+    font-size: 13.5px;
+    color: var(--text-secondary);
+  }
+  .gear-km-badge {
+    font-size: 15px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+  }
+  .gear-progress-track {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .gear-progress-bar {
+    height: 100%;
+    background: var(--white);
+    transition: width 0.3s ease;
+  }
+  .gear-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .gear-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .gear-meta-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .gear-meta-val {
+    font-size: 13.5px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .gear-notes {
+    font-family: var(--font-secondary);
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    line-height: 1.5;
+  }
+
+  /* Knižnica položky — zjednotený otvorený grid zhodný s hornou tabuľkou */
+  .lib-block {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 40px;
+    scroll-margin-top: 60px;
+  }
+  .lib-block h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 4px 0;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+  }
+  .lib-block-meta {
+    font-family: var(--font-secondary);
+    font-style: normal;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  /* Lightbox & Toast */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    cursor: zoom-out;
+  }
+  .lightbox-overlay img {
+    max-width: 92vw;
+    max-height: 92vh;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .toast-notice {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--white);
+    color: var(--black);
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 3000;
+    display: none;
+  }
+
+  /* Tab Prepínače */
+  .tab-view {
+    display: none;
+  }
+  .tab-view.active {
+    display: block;
+  }
+
+  /* ==========================================================================
+     ARCHITEKTONICKÝ FOOTER & TOTEM IDENTITA (v štýle Sliding Art & Displaay)
+     ========================================================================== */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 48px;
+    margin-top: 80px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer-brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .footer-emblem-svg {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    opacity: 1;
+    transition: transform 0.25s ease;
+  }
+  .footer-emblem-svg path {
+    fill: currentColor;
+  }
+  .footer-brand-wrap:hover .footer-emblem-svg {
+    transform: scale(1.05);
+  }
+  .footer-brand-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+  }
+  .footer-brand-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .footer-meta-stamp {
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .footer-colophon-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1.25fr 1.15fr;
+    gap: 36px;
+    font-size: 12px;
+    line-height: 1.55;
+    align-items: start;
+    width: 100%;
+  }
+  .colophon-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .colophon-col {
+    color: var(--text-secondary);
+    text-align: left;
+  }
+
+  @media (max-width: 1024px) {
+    .container {
+      padding: 32px 32px 80px 32px;
+    }
+    .hero-title {
+      font-size: 44px;
+    }
+    .footer-colophon-grid {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: calc(22px + env(safe-area-inset-top, 0px)) 16px 64px 16px;
+    }
+
+    .site-header-slot {
+      display: block;
+      min-height: 44px;
+      margin-bottom: 24px;
+    }
+
+    .site-header {
+      font-size: 13px;
+      line-height: 1.35;
+      margin-bottom: 0 !important;
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 12px;
+      padding-bottom: 16px;
+      position: relative;
+      z-index: 100;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .site-header.header-pinned {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      padding-top: calc(16px + env(safe-area-inset-top, 0px)) !important;
+      padding-bottom: 16px !important;
+      padding-left: calc(16px + env(safe-area-inset-left, 0px)) !important;
+      padding-right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+      margin: 0 !important;
+      background: #0c0c0e !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+      z-index: 1000 !important;
+      transform: translateY(0) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
+      pointer-events: auto !important;
+    }
+    .status-bar-cover {
+      display: block !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: calc(env(safe-area-inset-top, 0px) + 1px) !important;
+      background: #0c0c0e !important;
+      z-index: 10002 !important;
+      pointer-events: none !important;
+    }
+    .site-header.header-hidden {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      padding-top: calc(12px + env(safe-area-inset-top, 0px)) !important;
+      padding-bottom: 12px !important;
+      padding-left: calc(16px + env(safe-area-inset-left, 0px)) !important;
+      padding-right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+      margin: 0 !important;
+      background: #0c0c0e !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+      z-index: 1000 !important;
+      transform: translateY(-110%) !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+    }
+    .site-header-meta {
+      display: none !important;
+    }
+
+    /* Menu bar v hornej hlavičke vpravo na mobile */
+    .mobile-nav-container {
+      display: flex !important;
+      position: relative;
+      align-items: center;
+    }
+    .mobile-menu-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 5px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      font-family: var(--font-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+      line-height: 1.35;
+    }
+    .mobile-menu-trigger:active,
+    .mobile-menu-trigger.open {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--black);
+    }
+    .mobile-menu-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 190px;
+      background: #121215;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      padding: 5px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .mobile-menu-dropdown.open {
+      display: flex;
+      animation: menuFadeIn 0.15s ease;
+    }
+    @keyframes menuFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 9px 12px;
+      background: transparent;
+      border: none;
+      border-radius: 4px;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 500;
+      font-family: var(--font-primary);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mobile-menu-item:hover,
+    .mobile-menu-item:active {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+    }
+    .mobile-menu-item.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      font-weight: 600;
+    }
+    .mobile-menu-item .menu-item-dot {
+      font-size: 14px;
+      line-height: 1;
+      opacity: 0;
+      color: var(--white);
+    }
+    .mobile-menu-item.active .menu-item-dot {
+      opacity: 1;
+    }
+
+    .hero {
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .hero-lead {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .metrics-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .metrics-grid .metric-card:first-child {
+      grid-column: 1 / -1;
+    }
+    .metric-card {
+      padding: 12px 14px;
+    }
+    .metric-label {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .metric-value {
+      font-size: 20px;
+    }
+    .metric-sub {
+      font-size: 11.5px;
+    }
+
+    /* Pôvodné buttony pod hero sú na mobile skryté a nahradené menu barom v hlavičke */
+    .nav-tabs-wrap {
+      display: none !important;
+    }
+
+    .section-header-block {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .section-title-wrap h2 {
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+    .section-subtitle {
+      font-size: 13px;
+    }
+    .btn-controls-group {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+    }
+    .btn-pill-sm {
+      flex: 1;
+      text-align: center;
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+
+    .week-strip {
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 18px;
+    }
+    .strip-item {
+      padding: 6px 2px;
+    }
+    .strip-day-name {
+      font-size: 9.5px;
+    }
+    .strip-day-status {
+      height: 16px;
+      margin-top: 2px;
+    }
+    .strip-day-status svg {
+      width: 12px;
+      height: 12px;
+    }
+    .strip-day-sub {
+      display: none;
+    }
+
+    .workout-card {
+      padding: 16px 14px;
+      margin-bottom: 14px;
+    }
+    .workout-head {
+      display: block;
+      margin-bottom: 12px;
+    }
+    .workout-title {
+      font-size: 18px;
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+    }
+    .workout-params-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      font-size: 12px;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+    .workout-params-row span {
+      display: inline;
+    }
+    .workout-params-row strong {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .workout-params-row .param-pace {
+      width: 100%;
+      flex-basis: 100%;
+      display: block;
+      margin-top: 2px;
+      line-height: 1.45;
+      font-size: 12px;
+    }
+    .sub-block-box li {
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+    .workout-note-block {
+      font-size: 12px;
+      line-height: 1.5;
+      padding-left: 12px;
+      margin: 14px 0 !important;
+    }
+
+    /* V mobilnej verzii skryť checkbox v hlavičke a zobraziť až na konci sekcie pri dni — striktne vpravo */
+    .desktop-only {
+      display: none !important;
+    }
+    .mobile-only {
+      display: flex !important;
+    }
+    .workout-footer-check {
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+      margin-top: 14px !important;
+      padding-top: 14px !important;
+      border-top: 1px solid var(--border);
+      width: 100% !important;
+      box-sizing: border-box;
+    }
+    .workout-footer-check .custom-checkbox-wrap {
+      margin-left: auto !important;
+      margin-right: 0 !important;
+    }
+
+    /* Doplnkový beh karta v mobile */
+    .extra-workout-card {
+      padding: 16px 14px;
+      margin-bottom: 14px;
+    }
+    .extra-card-head {
+      margin-bottom: 0;
+    }
+    .extra-card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .extra-card-top-row .workout-meta-tag {
+      margin-bottom: 0 !important;
+      line-height: 1;
+    }
+    .btn-extra-del {
+      height: 26px;
+      padding: 4px 11px;
+      font-size: 11px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .btn-extra-del:hover {
+      color: var(--text-primary);
+      border-color: var(--white);
+      background: var(--card-bg-sub);
+    }
+    .btn-extra-del:active {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      color: var(--text-primary);
+    }
+    .extra-card-name-wrap {
+      width: 100%;
+    }
+    .extra-name-input {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+    }
+
+    .log-panel-wrap {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+    .log-panel-wrap.is-non-run {
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+    .log-panel-wrap.is-non-run .field-notes-col {
+      margin-bottom: 0 !important;
+    }
+    .log-inputs-grid:empty {
+      display: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Responzívne vstupy: Dátum na celý riadok, Vzdialenosť a Čas vedľa seba, Tempo ako samostatný box */
+    .log-inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .log-inputs-grid .field-col:nth-child(1) {
+      grid-column: 1 / -1;
+    }
+    .field-label-fixed {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      height: 15px;
+      line-height: 15px;
+    }
+    .field-input-box {
+      height: 35px;
+      font-size: 12px;
+      padding: 0 10px;
+    }
+    textarea.field-input-box {
+      field-sizing: content;
+      font-size: 12px;
+      line-height: 1.45;
+      padding: 8px 10px;
+      min-height: 44px;
+      resize: none;
+      overflow-y: hidden;
+    }
+    .field-pace-display {
+      grid-column: 1 / -1;
+      height: 28px;
+      min-height: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0 2px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-top: 0;
+      font-family: var(--font-primary);
+    }
+    .field-pace-display strong {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-primary);
+      font-family: inherit;
+      margin-left: 5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .btn-primary-action {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      padding: 0 18px;
+    }
+
+    .extras-section-block {
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+    .extras-header-wrap {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .extras-header-wrap h3 {
+      font-size: 18px;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+    }
+    .extras-header-wrap #btnAddExtra {
+      width: auto !important;
+      max-width: max-content !important;
+      padding: 5px 12px !important;
+      font-size: 11.5px !important;
+      height: 30px !important;
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+    }
+    .extras-lead {
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .footer-colophon-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .section-subheading {
+      font-size: 18px;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+      margin: 36px 0 14px 0 !important;
+    }
+
+    .chart-card {
+      padding: 18px 14px 14px 14px;
+      margin-bottom: 36px !important;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .chart-eyebrow {
+      font-size: 11px;
+      line-height: 1.45;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .chart-eyebrow-sub {
+      display: block;
+      font-size: 9.5px;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+    .chart-scroll-container {
+      margin: 0 -14px;
+      padding: 0 14px 6px 14px;
+      width: calc(100% + 28px);
+      box-sizing: border-box;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chart-svg {
+      display: block;
+      width: 760px;
+      min-width: 760px;
+      height: auto;
+      max-width: none;
+    }
+
+    /* Zjednotené rozostupy pre tabuľky a filtre pod názvom skupiny */
+    .table-container {
+      margin: 0 0 36px 0 !important;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: #26262c transparent;
+    }
+    .table-container::-webkit-scrollbar {
+      height: 3px;
+    }
+    .table-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .table-container::-webkit-scrollbar-thumb {
+      background: #26262c;
+      border-radius: 2px;
+    }
+
+    .runs-filter-bar {
+      margin: 0 0 14px 0 !important;
+    }
+
+    #gearContainer {
+      margin-bottom: 36px !important;
+    }
+
+    /* Ujednotené, identické tabuľky na mobile */
+    table.editorial-table {
+      font-size: 12px !important;
+      border-collapse: collapse;
+      width: 100% !important;
+      -webkit-text-size-adjust: none !important;
+      text-size-adjust: none !important;
+    }
+    table.editorial-table th, table.editorial-table td {
+      font-size: 12px !important;
+      padding: 11px 10px !important;
+      line-height: 1.35 !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-bottom: 1px solid var(--border);
+      box-sizing: border-box;
+      text-align: left !important;
+      color: var(--text-primary) !important;
+      -webkit-text-size-adjust: none !important;
+      text-size-adjust: none !important;
+    }
+    table.editorial-table th {
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.08em !important;
+      color: var(--text-muted) !important;
+      border-top: 1px solid var(--border) !important;
+      border-bottom: 1px solid var(--border) !important;
+      white-space: normal !important;
+      vertical-align: bottom !important;
+      line-height: 1.25 !important;
+      text-align: left !important;
+    }
+    table.editorial-table th:first-child,
+    table.editorial-table td:first-child {
+      position: static !important;
+      background: transparent !important;
+      padding-left: 0 !important;
+      text-align: left !important;
+    }
+    table.editorial-table th:last-child,
+    table.editorial-table td:last-child {
+      padding-right: 0 !important;
+    }
+    table.editorial-table td.secondary,
+    table.editorial-table.table-3col td:nth-child(3) {
+      white-space: normal;
+      word-break: normal;
+    }
+
+    /* Zjednotený 5-stĺpcový grid pre mobil – rovnomerné rozloženie stĺpcov (20% každý stĺpec) */
+    table.editorial-table.table-5col,
+    #tableWeeklySummary,
+    #tablePrs,
+    #tableAllRuns {
+      min-width: 640px !important;
+      width: 100% !important;
+      table-layout: fixed !important;
+    }
+    table.editorial-table.table-5col th,
+    table.editorial-table.table-5col td {
+      width: 20% !important;
+      padding: 11px 10px !important;
+      box-sizing: border-box !important;
+      text-align: left !important;
+    }
+    table.editorial-table.table-5col th:first-child,
+    table.editorial-table.table-5col td:first-child {
+      padding-left: 0 !important;
+    }
+    table.editorial-table.table-5col th:last-child,
+    table.editorial-table.table-5col td:last-child {
+      padding-right: 0 !important;
+    }
+    table.editorial-table.table-5col th {
+      white-space: normal !important;
+      vertical-align: bottom !important;
+      line-height: 1.25 !important;
+      text-align: left !important;
+    }
+
+    /* 3-stĺpcové tabuľky na mobile – rovnomerné rozloženie stĺpcov (33.333% každý stĺpec) */
+    table.editorial-table.table-3col {
+      min-width: 540px !important;
+      width: 100% !important;
+      table-layout: fixed !important;
+    }
+    table.editorial-table.table-3col th,
+    table.editorial-table.table-3col td {
+      width: 33.333% !important;
+      padding: 11px 10px !important;
+      box-sizing: border-box !important;
+      text-align: left !important;
+    }
+    table.editorial-table.table-3col th:first-child,
+    table.editorial-table.table-3col td:first-child {
+      padding-left: 0 !important;
+    }
+    table.editorial-table.table-3col th:last-child,
+    table.editorial-table.table-3col td:last-child {
+      padding-right: 0 !important;
+    }
+    table.editorial-table.table-3col th {
+      white-space: normal !important;
+      vertical-align: bottom !important;
+      line-height: 1.25 !important;
+      text-align: left !important;
+    }
+
+    /* Plánované míľniky prípravy na mobile – presne zladené s 5-stĺpcovým 640px gridom ostatných tabuliek */
+    table.editorial-table.table-milestones {
+      min-width: 640px !important;
+      width: 100% !important;
+      table-layout: fixed !important;
+    }
+    table.editorial-table.table-milestones th,
+    table.editorial-table.table-milestones td {
+      padding: 11px 10px !important;
+      line-height: 1.35 !important;
+      font-family: var(--font-primary) !important;
+      box-sizing: border-box !important;
+      text-align: left !important;
+    }
+    table.editorial-table.table-milestones th {
+      font-size: 10px !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      font-weight: 700 !important;
+      color: var(--text-muted) !important;
+      border-top: 1px solid var(--border) !important;
+      border-bottom: 1px solid var(--border) !important;
+      white-space: normal !important;
+      vertical-align: bottom !important;
+      line-height: 1.25 !important;
+      text-align: left !important;
+    }
+    table.editorial-table.table-milestones th:first-child,
+    table.editorial-table.table-milestones td:first-child {
+      padding-left: 0 !important;
+      text-align: left !important;
+    }
+    table.editorial-table.table-milestones th:last-child,
+    table.editorial-table.table-milestones td:last-child {
+      padding-right: 0 !important;
+    }
+    table.editorial-table.table-milestones th:nth-child(1) {
+      width: 20% !important;
+      white-space: nowrap !important;
+    }
+    table.editorial-table.table-milestones th:nth-child(2) {
+      width: 80% !important;
+      white-space: normal !important;
+    }
+    table.editorial-table.table-milestones td:nth-child(1) {
+      width: 20% !important;
+      font-size: 12px !important;
+      color: var(--text-primary) !important;
+      white-space: nowrap !important;
+      -webkit-text-size-adjust: none !important;
+      text-size-adjust: none !important;
+    }
+    table.editorial-table.table-milestones td:nth-child(1) strong {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      color: var(--text-primary) !important;
+    }
+    table.editorial-table.table-milestones td:nth-child(2) {
+      width: 80% !important;
+      font-family: var(--font-primary) !important;
+      font-size: 12px !important;
+      font-weight: 400 !important;
+      color: var(--text-primary) !important;
+      white-space: normal !important;
+      word-break: normal !important;
+      line-height: 1.35 !important;
+      -webkit-text-size-adjust: none !important;
+      text-size-adjust: none !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 30px;
+    }
+    .section-title-wrap h2 {
+      font-size: 22px;
+    }
+    .section-subheading {
+      font-size: 17px;
+    }
+    .workout-title {
+      font-size: 17px;
+    }
+    .metrics-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .footer-colophon-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="status-bar-cover" aria-hidden="true"></div>
+
+<div class="container">
+  <!-- Minimalistický Header -->
+  <div class="site-header-slot">
+    <header class="site-header">
+      <div class="site-brand">
+        Tréningový denník
+      </div>
+      <div class="site-header-meta" id="headerMeta">
+        2026 – 2027 &bull; 21.0975 km &bull; 4:16 /km
+      </div>
+      <div class="mobile-nav-container">
+        <button class="mobile-menu-trigger" id="mobileMenuTrigger" aria-label="Menu" aria-expanded="false">
+          Menu
+        </button>
+        <div class="mobile-menu-dropdown" id="mobileMenuDropdown">
+          <button class="mobile-menu-item active" data-tab="plan">
+            <span class="menu-item-text">Týždenný plán</span>
+            <span class="menu-item-dot">&bull;</span>
+          </button>
+          <button class="mobile-menu-item" data-tab="progress">
+            <span class="menu-item-text">Progres a dáta</span>
+            <span class="menu-item-dot">&bull;</span>
+          </button>
+          <button class="mobile-menu-item" data-tab="library">
+            <span class="menu-item-text">Metodika a cviky</span>
+            <span class="menu-item-dot">&bull;</span>
+          </button>
+          <button class="mobile-menu-item" data-tab="export">
+            <span class="menu-item-text">Report a záloha</span>
+            <span class="menu-item-dot">&bull;</span>
+          </button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero sekcia (čistá bez ambientnej siluety) -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Polmaratón pod 1:30:00</h1>
+      <p class="hero-lead">
+        Život, ktorý hľadám, sa skrýva v disciplíne, ktorú odmietam. 12 mesiacov systematickej prípravy. Jeden cieľ.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">Odhad k dnešku</div>
+          <div class="metric-value" id="currentEstValue">2:08:49</div>
+          <div class="metric-sub" id="currentEstSub" title="Prepočet podľa Riegelovho vzorca">tempo 6:06 /km</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Cieľový čas</div>
+          <div class="metric-value">1:30:00</div>
+          <div class="metric-sub">tempo 4:16 /km</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Zostáva do preteku</div>
+          <div class="metric-value" id="daysRemainValue">—</div>
+          <div class="metric-sub" id="targetDateSub">3. 10. 2027</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="goalBarFill"></div>
+        </div>
+        <div class="progress-labels">
+          <span id="goalBarStartLabel">Odhad 2:08:49</span>
+          <span id="goalBarPct">0 % k cieľu</span>
+          <span>Cieľ 1:30:00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigačné záložky v štýle Displaay pills -->
+  <nav class="nav-tabs-wrap">
+    <button class="nav-pill active" data-tab="plan">Týždenný plán</button>
+    <button class="nav-pill" data-tab="progress">Progres a dáta</button>
+    <button class="nav-pill" data-tab="library">Metodika a cviky</button>
+    <button class="nav-pill" data-tab="export">Report a záloha</button>
+  </nav>
+
+  <!-- ========================================================================
+       TAB 1: TÝŽDENNÝ PLÁN (bez sekcie "Vyhodnotenie doterajších dát a stavu")
+       ======================================================================== -->
+  <main class="tab-view active" id="view-plan">
+    <div class="content-section">
+      <div class="section-header-block">
+        <div class="section-title-wrap">
+          <h2 id="weekHeadline">Týždeň 1</h2>
+          <div class="section-subtitle" id="weekDates">12. 10. – 18. 10. 2026</div>
+          <div class="week-delta-meta" id="weekDeltaMeta"></div>
+        </div>
+        <div class="btn-controls-group">
+          <button class="btn-pill-sm" id="btnPrevWeek">&larr; Predchádzajúci</button>
+          <button class="btn-pill-sm" id="btnNextWeek">Nasledujúci &rarr;</button>
+        </div>
+      </div>
+
+      <p class="font-secondary" id="weekFocusText" style="font-size: 16px; color: var(--text-secondary); margin-bottom: 24px;"></p>
+
+      <!-- Prehľad dní v týždni -->
+      <div class="week-strip" id="weekStrip"></div>
+
+      <!-- Zoznam tréningov -->
+      <div id="workoutsContainer"></div>
+
+      <!-- Doplnkové behy mimo plánu -->
+      <div class="extras-section-block">
+        <div class="extras-header-wrap">
+          <h3>Doplnkové behy mimo plánu</h3>
+          <button class="btn-pill-sm" id="btnAddExtra">+ Pridať beh</button>
+        </div>
+        <p class="extras-lead">
+          Preteky, kontrolné behy alebo neplánované výbehy.
+        </p>
+        <div id="extrasContainer"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       TAB 2: PROGRES A DÁTA
+       ======================================================================== -->
+  <main class="tab-view" id="view-progress">
+    <div class="content-section">
+      <div class="section-header-block">
+        <div class="section-title-wrap">
+          <h2>Prehľad kilometráže a tempa</h2>
+          <div class="section-subtitle">Objektívne sledovanie tréningových dát a rýchlostí</div>
+        </div>
+      </div>
+
+      <div class="metrics-grid" id="progressSummaryMetrics"></div>
+
+      <div class="chart-card">
+        <div class="chart-eyebrow">Týždenná kilometráž (km)</div>
+        <div class="chart-scroll-container">
+          <div id="chartVolumeSvg"></div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-eyebrow">Priemerné tempo behov (min/km) <span class="chart-eyebrow-sub">&bull; Prerušovaná linka označuje cieľ 4:16 /km</span></div>
+        <div class="chart-scroll-container">
+          <div id="chartPaceSvg"></div>
+        </div>
+      </div>
+
+      <h3 class="section-subheading">Týždenný súhrn kilometráže a tempa</h3>
+      <div class="table-container">
+        <table class="editorial-table table-5col" id="tableWeeklySummary"></table>
+      </div>
+
+      <h3 class="section-subheading">Doterajšie najlepšie výkony (PR)</h3>
+      <div class="table-container">
+        <table class="editorial-table table-5col" id="tablePrs"></table>
+      </div>
+
+      <h3 class="section-subheading">Plánované míľniky prípravy</h3>
+      <div class="table-container">
+        <table class="editorial-table table-milestones" id="tableMilestones"></table>
+      </div>
+
+      <h3 class="section-subheading">Aktívna bežecká obuv a technické vybavenie</h3>
+      <div id="gearContainer"></div>
+
+      <h3 class="section-subheading">Kompletný zoznam zaznamenaných behov</h3>
+      <div class="runs-filter-bar" id="runsFilterBar">
+        <button class="filter-pill active" data-filter="all">Všetky behy</button>
+        <button class="filter-pill" data-filter="interval">Intervaly a tempo</button>
+        <button class="filter-pill" data-filter="easy">Ľahké behy (Z2)</button>
+        <button class="filter-pill" data-filter="long">Dlhé behy</button>
+      </div>
+      <div class="table-container">
+        <table class="editorial-table table-5col" id="tableAllRuns"></table>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       TAB 3: METODIKA A CVIKY
+       ======================================================================== -->
+  <main class="tab-view" id="view-library">
+    <div class="content-section">
+      <div class="section-header-block">
+        <div class="section-title-wrap">
+          <h2>Tréningové tempá a knižnica cvikov</h2>
+          <div class="section-subtitle">Rýchlostné pásma bez merania pulzu a technické postupy</div>
+        </div>
+      </div>
+
+      <h3 class="section-subheading">Aktuálne tréningové zóny</h3>
+      <div class="table-container" style="margin-bottom: 40px;">
+        <table class="editorial-table table-3col" id="tablePaces"></table>
+      </div>
+
+      <div id="libraryContainer"></div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       TAB 4: REPORT A ZÁLOHA
+       ======================================================================== -->
+  <main class="tab-view" id="view-export">
+    <div class="content-section">
+      <div class="section-header-block">
+        <div class="section-title-wrap">
+          <h2>Týždenný report pre trénera</h2>
+          <div class="section-subtitle">Export zhrnutia tréningov na odoslanie do chatu</div>
+        </div>
+      </div>
+
+      <button class="btn-primary-action" id="btnCopyReport">Skopírovať report aktuálneho týždňa</button>
+      <textarea id="reportOutput" class="field-input-box" style="margin-top:16px; min-height:180px; display:none; width:100%;" readonly></textarea>
+
+      <h3 style="font-size:18px; font-weight:700; margin: 44px 0 12px;">Zálohovanie dát</h3>
+      <p class="font-secondary" style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+        Záznamy a screenshoty sú uložené lokálne v tomto prehliadači. Pred vymazaním histórie si stiahnite zálohu.
+      </p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn-primary-action outline" id="btnExportJson">Stiahnuť zálohu (JSON)</button>
+        <button class="btn-primary-action outline" id="btnExportCsv">Exportovať behy (CSV)</button>
+        <label class="btn-primary-action outline" style="cursor:pointer;">
+          Obnoviť zo zálohy
+          <input type="file" id="fileImportJson" accept=".json" style="display:none;">
+        </label>
+      </div>
+
+      <h3 style="font-size:18px; font-weight:700; margin: 44px 0 12px;">Dátum cieľového polmaratónu</h3>
+      <div style="max-width: 260px;">
+        <div class="field-col">
+          <label class="field-label-fixed" for="inputRaceDate">Dátum preteku</label>
+          <input type="date" class="field-input-box" id="inputRaceDate">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER — COLOPHON & TOTEM IDENTITA (v štýle Sliding Art & Displaay)
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand-wrap">
+        <svg class="footer-emblem-svg" viewBox="31 36 752 741" fill="none" aria-hidden="true">
+          <path fill="currentColor" d="M99.5,500.3c.2,14.9,7.6,24.7,19.1,32.9,8.5,6.1,33.9,22.6,42.7,26.3,8.5,3.6,15.3,4.1,23.9.5,6.9-2.9,32.4-29.2,37.8-36.2,3.7-4.7,6.7-13.4,11-17,3.9-3.4,11.3-5.4,14.5-10.5,12.1,2.5,23.8,15.3,37,13.1,13.3-2.2,23.9-24.5,32.4-34.6,6.3-7.3,16.5-14.6,21.9-22.1,5.5-7.5,10.5-22.5,15.4-31.6,4.1-7.6,8.9-14.9,13.6-22.1,9.8,1.6,13.4,11.2,19.5,17.2,2.4,2.4,6.1,4,8.5,6.5,16.7,17,31.8,49.4,38.7,72.3,5.1,16.8,7.2,34.6,14,51,3.2,7.9,6.9,9.5,10,15,2.3,4.2,2.9,10.5,4.8,15.2,2.5,6.1,7.5,12.4,9.5,18.5,4.6,13.9.6,28,6.3,40.7,4.4,9.6,27.7,25.5,35.7,34.3,7.7,8.5,10.8,24.6,23.1,29.9,13.4,5.8,30.7.5,43.1-5.7,8.5-4.3,14.5-12.3,23-17,7.1-4,16-6,23-10,5.8-3.3,9.5-9,13.9-12,5.8-4,15.1-6.8,21.4-10.6,15.2-9.2,27.8-31,39.5-44.5,1.9-2.2,4.6-3.3,6.5-5.5,5-5.6,6-14.5,4.8-21.8-.6-3.5-9.6-20.2-12.2-22.8-2.3-2.2-5.4-3.4-7.5-5.5-13.1-12.6-14.7-20-35.6-22.4-20-2.3-23.8,10.6-38.1,18.8-1.4.8-2.5,1.7-3.9.2-10.2-15.6-21-30.6-30.3-46.8-29.2-51.2-58.5-102.5-88.8-153.2-10.1-12.2-26.6-16.3-40.4-23.1.1-1.4,1.5-1.6,2.5-2,16.9-7.7,42.1-10,59.2-17.8,24-10.9,70-44.1,89.8-62.2,6.8-6.2,10.8-11.5,9.4-21.4-1.7-12.8-32.5-41.5-39.4-54.6-6.1-6.8-15.7-9.8-24.5-6.5-9.3,3.5-32.5,25.2-42.7,32.3-19.1,13.4-38.9,25.3-62.1,29.9-9.5,1.9-18.3.6-27.6,2.2l-1.6-2.3c4.6-14.4-4.1-26-8.5-38.6-9.4-26.4-16.4-39.7-30.3-63.7-18.2-31.4-54,.6-72.8,13.5-14,9.6-38.8,21.1-40.1,41-.9,14.2,11.3,26.4,15.8,39.2-12.4,3.1-25.5,6.1-37.2,11.3-13.8,6.1-34.3,16.2-47.1,23.9-8.8,5.3-19.3,16.1-27.8,20.2-12.7,6.1-36.7,4.1-43.7,18.3-3.5,7.1-2.3,12.2-.9,19.5,2.6,14.1,8.6,39.4,13.4,52.6,8.3,23,32.3,11.4,49,7.4,1.5-.3,2.7-.8,2.3,1.3-6.8,7-15.9,13.4-21.8,21.2-4.3,5.7-6.9,12.9-11,19-11.5,17.5-26,34.4-37,52-3.9,6.2-4.5,11.1-7.3,16.7-4.6,9.1-16,18.3-15.9,30.1ZM201.6,359.8c27.3-10.8,46.2-34.7,74-45,.8,1.1-4.6,20-5.5,23-2.1,7.4-10.1,35.7-14,40-1.4,1.7-4.1,2.6-5.6,4.5h-2c-12-4.6-23.1-10.8-34.6-16.4-1.3-.6-13.4-4.7-12.4-6.1Z"/>
+        </svg>
+        <div class="footer-brand-text">
+          <div class="footer-brand-title">TOBIÁŠ CINGEĽ</div>
+          <div class="footer-brand-sub font-secondary">Polmaratón pod 1:30:00 &bull; Tréningový denník</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-colophon-grid">
+      <div class="colophon-col">
+        <div class="colophon-label">Štruktúra plánu</div>
+        <div class="font-secondary">3 behy týždenne (Z2 voľný beh, dráhové intervaly, nedeľný dlhý beh) + silová kompenzácia.</div>
+      </div>
+      <div class="colophon-col">
+        <div class="colophon-label">Typografia</div>
+        <div class="font-secondary">Avantt & Tobias od Displaay Type Foundry.</div>
+      </div>
+      <div class="colophon-col">
+        <div class="colophon-label">Dáta & Meranie</div>
+        <div class="font-secondary">Lokálna perzistencia, Strava štatistiky a týždenné trénerské vyhodnocovanie.</div>
+      </div>
+      <div class="colophon-col">
+        <div class="colophon-label">Cieľový míľnik</div>
+        <div class="font-secondary">2026 – 2027 &bull; 21.0975 km &bull; 4:16 /km</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Lightbox pre screenshoty -->
+<div class="lightbox-overlay" id="lightboxView"><img id="lightboxImg" alt="Detail záznamu"></div>
+
+<!-- Toast oznámenie -->
+<div class="toast-notice" id="toastMessage"></div>
+
+<script src="plans.js"></script>
+<script>
+(() => {
+  "use strict";
+  const T = window.TRAINING;
+
+  const TYPE_NAMES = {
+    easy: "Ľahký beh",
+    long: "Dlhý beh",
+    interval: "Intervaly",
+    tempo: "Tempo",
+    race: "Pretek / Test",
+    strength: "Posilňovanie",
+    mobility: "Mobilita",
+    rest: "Voľno"
+  };
+
+  /* Lokálne úložisko */
+  const LS = {
+    get(k, fallback) {
+      try { const v = JSON.parse(localStorage.getItem(k)); return v ?? fallback; }
+      catch(e) { return fallback; }
+    },
+    set(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+  };
+
+  // Automatické vyčistenie testovacích behov z fázy ladenia pre čistý východiskový stav presne 19 behov (111,95 km)
+  if (!localStorage.getItem("beh.v3_clean")) {
+    localStorage.removeItem("beh.logs");
+    localStorage.removeItem("beh.extras");
+    localStorage.removeItem("beh.logs.v2");
+    localStorage.removeItem("beh.extras.v2");
+    localStorage.removeItem("beh.logs.v3");
+    localStorage.removeItem("beh.extras.v3");
+    localStorage.setItem("beh.v3_clean", "1");
+  }
+
+  let logs = LS.get("beh.logs.v3", {});
+  if (T.initialLogs) {
+    let populatedInitial = false;
+    Object.keys(T.initialLogs).forEach(k => {
+      if (!logs[k] || !logs[k].km) {
+        logs[k] = Object.assign({}, T.initialLogs[k], logs[k] || {});
+        populatedInitial = true;
+      }
+    });
+    if (populatedInitial) LS.set("beh.logs.v3", logs);
+  }
+  let extras = LS.get("beh.extras.v3", []);
+  let settings = LS.get("beh.settings", {});
+
+  let lastServerUpdatedAt = null;
+  let isSyncing = false;
+  const syncChannel = ("BroadcastChannel" in window) ? new BroadcastChannel("beh_sync") : null;
+
+  async function syncWithCloud(forcePush = false) {
+    // Čisté lokálne úložisko – bez externých zápisov do Edge Configu
+  }
+
+  async function pushToCloud() {
+    // Všetky dáta sú bezpečne ukladané v localStorage a syncované cez BroadcastChannel
+  }
+
+  const saveLogs = () => {
+    LS.set("beh.logs.v3", logs);
+    renderAllViews();
+    if (syncChannel) syncChannel.postMessage({ type: "UPDATE" });
+    pushToCloud();
+  };
+
+  const saveExtras = () => {
+    LS.set("beh.extras.v3", extras);
+    renderAllViews();
+    if (syncChannel) syncChannel.postMessage({ type: "UPDATE" });
+    pushToCloud();
+  };
+
+  // Okamžitá synchronizácia pri návrate do aplikácie, odomknutí telefónu alebo aktivácii okna
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      syncWithCloud();
+    }
+  });
+  window.addEventListener("focus", () => {
+    syncWithCloud();
+  });
+  window.addEventListener("online", () => {
+    syncWithCloud(true);
+  });
+
+  // Okamžitá synchronizácia medzi otvorenými záložkami na tom istom zariadení (0 ms latencia)
+  if (syncChannel) {
+    syncChannel.onmessage = e => {
+      if (e.data && e.data.type === "UPDATE") {
+        logs = LS.get("beh.logs.v3", {});
+        extras = LS.get("beh.extras.v3", []);
+        renderAllViews();
+      }
+    };
+  }
+
+  // Automatické periodické overovanie zmien z druhého zariadenia každých 5 sekúnd (len pri otvorenej záložke)
+  setInterval(() => {
+    if (document.visibilityState === "visible") {
+      syncWithCloud();
+    }
+  }, 5000);
+
+  /* IndexedDB pre screenshoty */
+  const DB = {
+    db: null,
+    open() {
+      return new Promise(res => {
+        try {
+          const req = indexedDB.open("beh-storage-v2", 1);
+          req.onupgradeneeded = () => req.result.createObjectStore("shots");
+          req.onsuccess = () => { this.db = req.result; res(true); };
+          req.onerror = () => res(false);
+        } catch(e) { res(false); }
+      });
+    },
+    put(id, data) {
+      return new Promise((res, rej) => {
+        const tx = this.db.transaction("shots", "readwrite");
+        const req = tx.objectStore("shots").put(data, id);
+        req.onsuccess = () => res();
+        req.onerror = () => rej(req.error);
+      });
+    },
+    get(id) {
+      if (typeof id === "string" && (id.startsWith("/") || id.startsWith("http") || id.startsWith("data:"))) {
+        return Promise.resolve(id);
+      }
+      return new Promise(res => {
+        if (!this.db) return res(null);
+        try {
+          const tx = this.db.transaction("shots", "readonly");
+          const req = tx.objectStore("shots").get(id);
+          req.onsuccess = () => res(req.result);
+          req.onerror = () => res(null);
+        } catch (e) {
+          res(null);
+        }
+      });
+    },
+    del(id) {
+      return new Promise(res => {
+        const tx = this.db.transaction("shots", "readwrite");
+        const req = tx.objectStore("shots").delete(id);
+        req.onsuccess = () => res();
+        req.onerror = () => res();
+      });
+    }
+  };
+
+  /* Pomocné funkcie */
+  const $ = sel => document.querySelector(sel);
+  const esc = str => String(str ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+  const parseTime = t => {
+    if (!t) return 0;
+    const parts = String(t).trim().split(":").map(Number);
+    if (parts.some(isNaN)) return 0;
+    return parts.reduce((acc, curr) => acc * 60 + curr, 0);
+  };
+  const fmtTime = sec => {
+    sec = Math.round(sec);
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60);
+    const s = sec % 60;
+    return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(s).padStart(2, "0");
+  };
+  const fmtPace = (sec, km) => (km > 0 && sec > 0) ? fmtTime(sec / km) : "—";
+  const fmtKm = km => (km == null || isNaN(km)) ? "0,00 km" : Number(km).toFixed(2).replace(".", ",") + " km";
+  const fmtRuns = n => {
+    n = Number(n) || 0;
+    if (n === 1) return "1 beh";
+    if (n >= 2 && n <= 4) return n + " behy";
+    return n + " behov";
+  };
+  const toDate = s => new Date(s + "T12:00:00");
+  const getTodayStr = () => {
+    const n = new Date();
+    return n.getFullYear() + "-" + String(n.getMonth() + 1).padStart(2, "0") + "-" + String(n.getDate()).padStart(2, "0");
+  };
+  const fmtDateShort = s => { const d = toDate(s); return d.getDate() + ". " + (d.getMonth() + 1) + "."; };
+  const fmtDateFull = s => { const d = toDate(s); return d.getDate() + ". " + (d.getMonth() + 1) + ". " + d.getFullYear(); };
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+  const toast = msg => {
+    const el = $("#toastMessage");
+    el.textContent = msg;
+    el.style.display = "block";
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => { el.style.display = "none"; }, 2000);
+  };
+
+  const parsePaceToSec = str => {
+    if (!str) return 0;
+    const m = String(str).match(/\b(\d+:[0-5]\d)\b/);
+    return m ? parseTime(m[1]) : 0;
+  };
+
+  function getAllRuns() {
+    const res = [];
+    T.history.forEach(h => {
+      res.push({
+        date: h.date,
+        name: h.name,
+        km: h.km,
+        sec: parseTime(h.time),
+        type: "easy",
+        source: "História"
+      });
+    });
+    T.weeks.forEach(w => {
+      w.workouts.forEach(wo => {
+        const l = logs[wo.id];
+        if (!l || wo.type === "rest" || wo.type === "strength" || wo.type === "mobility") return;
+        const km = (parseFloat(l.km) > 0) ? parseFloat(l.km) : (l.done && wo.distanceKm ? wo.distanceKm : 0);
+        let sec = parseTime(l.time);
+        if (!sec && km > 0 && wo.pace) {
+          const pSec = parsePaceToSec(wo.pace) || 360;
+          sec = Math.round(km * pSec);
+        }
+        if (km > 0) {
+          res.push({
+            date: l.date || wo.date,
+            name: wo.title,
+            km: km,
+            sec: sec || 0,
+            type: wo.type,
+            source: "Týždeň " + w.number
+          });
+        }
+      });
+    });
+    extras.forEach(e => {
+      const km = parseFloat(e.km);
+      const sec = parseTime(e.time);
+      if (km > 0) {
+        res.push({
+          date: e.date,
+          name: e.name || "Doplnkový beh",
+          km: km,
+          sec: sec || 0,
+          type: e.type || "easy",
+          source: "Mimo plánu"
+        });
+      }
+    });
+    return res.sort((a, b) => a.date.localeCompare(b.date));
+  }
+
+  function getCurrentEstimate() {
+    const all = getAllRuns().filter(r => r.sec > 0 && r.km > 0);
+    if (!all.length) return T.goal.startPredSec || 7729;
+    // Riegelov vzorec: T2 = T1 * (21.0975 / D1)^1.06
+    const estimates = all.map(r => r.sec * Math.pow(21.0975 / r.km, 1.06));
+    const avgSec = Math.round(estimates.reduce((a, b) => a + b, 0) / estimates.length);
+    return avgSec;
+  }
+
+  function renderHero() {
+    const raceDateStr = settings.raceDate || T.goal.raceDate;
+    const diffDays = Math.max(0, Math.ceil((toDate(raceDateStr) - toDate(getTodayStr())) / 864e5));
+    $("#daysRemainValue").textContent = diffDays + " dní";
+    $("#targetDateSub").textContent = fmtDateFull(raceDateStr);
+
+    const all = getAllRuns();
+    const startSec = T.goal.startPredSec || 7729;
+    const targetSec = T.goal.targetSec;
+    const currentSec = getCurrentEstimate();
+
+    const currentEl = $("#currentEstValue");
+    if (currentEl) currentEl.textContent = fmtTime(currentSec);
+    const currentSubEl = $("#currentEstSub");
+    if (currentSubEl) currentSubEl.textContent = `tempo ${fmtPace(currentSec, 21.0975)} /km`;
+
+    const goalBarStartEl = $("#goalBarStartLabel");
+    if (goalBarStartEl) goalBarStartEl.textContent = "Odhad " + fmtTime(currentSec);
+
+    const totalDiff = startSec - targetSec;
+    const achievedDiff = startSec - currentSec;
+    const pct = Math.max(0, Math.min(100, (achievedDiff / totalDiff) * 100));
+
+    $("#goalBarFill").style.width = Math.max(1, pct) + "%";
+    $("#goalBarPct").textContent = Math.round(pct) + " % k cieľu";
+  }
+
+  let currentWeekIdx = (() => {
+    const today = getTodayStr();
+    let idx = T.weeks.findIndex(w => today >= w.start && today <= w.end);
+    if (idx < 0) idx = today < T.weeks[0].start ? 0 : T.weeks.length - 1;
+    return idx;
+  })();
+
+  function updateWeekDeltaMeta() {
+    const w = T.weeks[currentWeekIdx];
+    const deltaEl = $("#weekDeltaMeta");
+    if (!deltaEl) return;
+    const plannedKm = w.targetKm || w.workouts.reduce((s, wo) => s + (wo.distanceKm || 0), 0);
+    let doneKm = 0;
+    w.workouts.forEach(wo => {
+      const l = logs[wo.id];
+      if (l && l.done) {
+        doneKm += parseFloat(l.km) || (wo.distanceKm || 0);
+      }
+    });
+    const currentExtras = extras.filter(e => e.date >= w.start && e.date <= w.end);
+    currentExtras.forEach(e => {
+      doneKm += parseFloat(e.km) || 0;
+    });
+
+    deltaEl.innerHTML = `Plán: <strong>${plannedKm.toFixed(1)} km</strong> &bull; Odbehnuté: <strong>${doneKm.toFixed(1)} km</strong>`;
+  }
+
+  function renderWeekPlan() {
+    const w = T.weeks[currentWeekIdx];
+    $("#weekHeadline").textContent = "Týždeň " + w.number + " — " + w.phase;
+    $("#weekDates").textContent = fmtDateFull(w.start) + " – " + fmtDateFull(w.end);
+    if (w.focus) {
+      $("#weekFocusText").textContent = w.focus;
+      $("#weekFocusText").style.display = "block";
+    } else {
+      $("#weekFocusText").textContent = "";
+      $("#weekFocusText").style.display = "none";
+    }
+    updateWeekDeltaMeta();
+
+    $("#btnPrevWeek").disabled = (currentWeekIdx === 0);
+    $("#btnNextWeek").disabled = (currentWeekIdx === T.weeks.length - 1);
+
+    const today = getTodayStr();
+    $("#weekStrip").innerHTML = w.workouts.map(wo => {
+      const isDone = logs[wo.id]?.done;
+      const isRun = (wo.type !== "rest" && wo.type !== "strength" && wo.type !== "mobility");
+      const sub = isRun ? (wo.distanceKm ? wo.distanceKm + " km" : "Beh") : TYPE_NAMES[wo.type];
+      const checkArrowSvg = `<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+      return `
+        <div class="strip-item ${isDone ? "done" : ""} ${wo.date === today ? "today" : ""}" data-jump="${wo.id}">
+          <div class="strip-day-name">${wo.day.slice(0, 2)}</div>
+          <div class="strip-day-status">${isDone ? checkArrowSvg : "—"}</div>
+          <div class="strip-day-sub">${sub}</div>
+        </div>
+      `;
+    }).join("");
+
+    $("#workoutsContainer").innerHTML = w.workouts.map(cardHtml).join("");
+    w.workouts.forEach(wo => {
+      bindCardEvents(wo.id, () => logs[wo.id] || (logs[wo.id] = {}), saveLogs);
+      loadSavedShots(wo.id, logs[wo.id]?.shots || []);
+    });
+
+    renderExtrasList();
+    requestAnimationFrame(() => {
+      document.querySelectorAll('textarea[data-key="notes"]').forEach(autoResizeTextarea);
+    });
+  }
+
+  function cardHtml(wo) {
+    const l = logs[wo.id] || {};
+    if (!l.date) l.date = wo.date;
+    const isRun = (wo.type !== "rest" && wo.type !== "strength" && wo.type !== "mobility");
+    const blocks = [
+      ["Rozcvička", wo.warmup],
+      ["Hlavná časť", wo.main],
+      ["Upokojenie", wo.cooldown]
+    ].filter(b => b[1] && b[1].length);
+
+    return `
+      <div class="workout-card ${l.done ? "done" : ""}" id="card-${wo.id}">
+        <div class="workout-head">
+          <div>
+            <div class="workout-meta-tag">${esc(wo.day)} &bull; ${TYPE_NAMES[wo.type] || "Tréning"}</div>
+            <div class="workout-title">${esc(wo.title)}</div>
+            <div class="workout-params-row">
+              ${wo.distanceKm ? `<span>Vzdialenosť: <strong>${wo.distanceKm} km</strong></span>` : ""}
+              ${wo.duration ? `<span>Trvanie: <strong>${esc(wo.duration)}</strong></span>` : ""}
+              ${wo.pace ? `<span class="param-pace">Predpísané tempo: <strong>${esc(wo.pace)}</strong></span>` : ""}
+            </div>
+          </div>
+          <div class="workout-head-check desktop-only">
+            <label class="custom-checkbox-wrap ${l.done ? "checked" : ""}" title="Označiť ako splnené" data-check-done>
+              <input type="checkbox" data-key="done" ${l.done ? "checked" : ""}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </label>
+          </div>
+        </div>
+
+        ${blocks.length ? `
+          <div class="workout-sub-blocks">
+            ${blocks.map(b => `
+              <div class="sub-block-box">
+                <h4>${b[0]}</h4>
+                <ul>${b[1].map(it => `<li>${esc(it)}</li>`).join("")}</ul>
+              </div>
+            `).join("")}
+          </div>
+        ` : ""}
+
+        ${wo.notes ? `<div class="workout-note-block">${esc(wo.notes)}</div>` : ""}
+
+        ${formLogHtml(l, isRun, false)}
+
+        <div class="workout-footer-check mobile-only">
+          <label class="custom-checkbox-wrap ${l.done ? "checked" : ""}" title="Označiť ako splnené" data-check-done>
+            <input type="checkbox" data-key="done" ${l.done ? "checked" : ""}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </label>
+        </div>
+      </div>
+    `;
+  }
+
+  /* Logovací formulár s perfektným zarovnaním vstupov */
+  function formLogHtml(l, isRun, isExtra = false) {
+    return `
+      <div class="log-panel-wrap ${isRun ? "is-run" : "is-non-run"}">
+        ${isRun ? `
+          <div class="log-inputs-grid">
+            <div class="field-col">
+              <label class="field-label-fixed">Vzdialenosť (km)</label>
+              <input type="number" step="0.01" min="0" class="field-input-box" data-key="km" value="${esc(l.km || "")}" placeholder="6.10">
+            </div>
+            <div class="field-col">
+              <label class="field-label-fixed">Čas (mm:ss)</label>
+              <input type="text" class="field-input-box" data-key="time" value="${esc(l.time || "")}" placeholder="38:40">
+            </div>
+            <div class="field-col">
+              <label class="field-label-fixed">Hodnotenie</label>
+              <input type="text" class="field-input-box" data-key="rpe" value="${esc(l.rpe || "")}" placeholder="napr. 7/10">
+            </div>
+            <div class="field-pace-display">
+              <span>Priemerné tempo:</span>
+              <strong data-calc-pace>${fmtPace(parseTime(l.time), parseFloat(l.km))}</strong>&nbsp;/km
+            </div>
+          </div>
+        ` : ""}
+
+        <div class="field-col field-notes-col" style="${isRun ? "margin-bottom: 14px;" : ""}">
+          <label class="field-label-fixed">
+            <span class="desktop-only">Poznámka${isRun ? " k tréningu (medzičasy úsekov na dráhe, technika)" : ""}</span>
+            <span class="mobile-only">POZNÁMKA</span>
+          </label>
+          <textarea class="field-input-box" data-key="notes" placeholder="${isRun ? "napr. 400 m úseky: 1:52, 1:51, 1:53, 1:50, 1:50, 1:48. Krok bol uvoľnený." : "Poznámka k posilňovaniu, mobilite alebo regenerácii..."}">${esc(l.notes || "")}</textarea>
+        </div>
+
+        ${isRun ? `
+          <div class="attachment-wrap">
+            <label class="upload-pill" data-upload-label>
+              <span data-upload-text>Nahrať screenshot zo Stravy</span>
+              <input type="file" accept="image/*" multiple data-upload-shot>
+            </label>
+            <div class="attachment-status-bar" data-shots-container></div>
+          </div>
+        ` : ""}
+      </div>
+    `;
+  }
+
+  /* Inteligentný OCR parser pre Strava screenshoty */
+  function parseStravaText(rawText) {
+    const result = { km: null, time: null, pace: null, date: null };
+    if (!rawText || typeof rawText !== "string") return result;
+
+    const clean = rawText.replace(/\r/g, "\n");
+    const lines = clean.split("\n").map(l => l.trim()).filter(Boolean);
+
+    // 1. Dátum (English, Slovak, relatívny dnes/včera, numerický)
+    const monthMap = {
+      january: "01", jan: "01", január: "01", januára: "01",
+      february: "02", feb: "02", február: "02", februára: "02",
+      march: "03", mar: "03", marec: "03", marca: "03",
+      april: "04", apr: "04", apríl: "04", apríla: "04",
+      may: "05", máj: "05", mája: "05",
+      june: "06", jun: "06", jún: "06", júna: "06",
+      july: "07", jul: "07", júl: "07", júla: "07",
+      august: "08", aug: "08", augusta: "08",
+      september: "09", sep: "09", sept: "09", septembra: "09",
+      october: "10", oct: "10", október: "10", októbra: "10",
+      november: "11", nov: "11", novembra: "11",
+      december: "12", dec: "12", decembra: "12"
+    };
+
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+    const yest = new Date(Date.now() - 864e5);
+    const yestStr = yest.toISOString().slice(0, 10);
+
+    if (/\b(?:today|dnes)\b/i.test(clean)) {
+      result.date = todayStr;
+    } else if (/\b(?:yesterday|včera)\b/i.test(clean)) {
+      result.date = yestStr;
+    } else {
+      const mPattern = Object.keys(monthMap).join("|");
+      const dRegex1 = new RegExp(`\\b(\\d{1,2})[.\\s]+(${mPattern})[a-z]*[.\\s,]+(?:(\\d{4}))?\\b`, "i");
+      const dRegex2 = new RegExp(`\\b(${mPattern})[a-z]*[.\\s]+(\\d{1,2})[.\\s,]+(?:(\\d{4}))?\\b`, "i");
+      const numRegex = /\b(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})\b/;
+
+      const match1 = clean.match(dRegex1);
+      if (match1) {
+        const d = match1[1].padStart(2, "0");
+        const m = monthMap[match1[2].toLowerCase()];
+        const y = match1[3] || "2026";
+        result.date = `${y}-${m}-${d}`;
+      } else {
+        const match2 = clean.match(dRegex2);
+        if (match2) {
+          const m = monthMap[match2[1].toLowerCase()];
+          const d = match2[2].padStart(2, "0");
+          const y = match2[3] || "2026";
+          result.date = `${y}-${m}-${d}`;
+        } else {
+          const numMatch = clean.match(numRegex);
+          if (numMatch) {
+            result.date = `${numMatch[3]}-${numMatch[2].padStart(2, "0")}-${numMatch[1].padStart(2, "0")}`;
+          }
+        }
+      }
+    }
+
+    // 2. Tempo (napr. 5:28 /km, 5:44 jm, 5:37 /km, 5:59 km)
+    for (let i = 0; i < lines.length; i++) {
+      if (/pace|tempo/i.test(lines[i])) {
+        const candidates = [lines[i-1], lines[i], lines[i+1]].filter(Boolean);
+        for (const c of candidates) {
+          const m = c.match(/\b([3-8]:[0-5]\d)\b/);
+          if (m) {
+            result.pace = m[1];
+            break;
+          }
+        }
+        if (result.pace) break;
+      }
+    }
+    if (!result.pace) {
+      const paceRegex = /\b([3-8]:[0-5]\d)\s*(?:\/km|\/ km|min\/km|km\b|im\b|jm\b|fkm\b|[a-z]{1,2}m\b)/i;
+      const pm = clean.match(paceRegex);
+      if (pm) result.pace = pm[1];
+    }
+
+    // 3. Čas pohybu (moving time / elapsed time)
+    function isClockTime(text, matchIdx, matchLen) {
+      const before = text.slice(Math.max(0, matchIdx - 6), matchIdx);
+      const after = text.slice(matchIdx + matchLen, matchIdx + matchLen + 8);
+      return /\b(?:at|o)\s*$/i.test(before) || /^\s*(?:on|o|at|am|pm)\b/i.test(after);
+    }
+
+    for (let i = 0; i < lines.length; i++) {
+      if (/moving time|čas pohybu|elapsed time|trvanie/i.test(lines[i])) {
+        const candidates = [lines[i-1], lines[i], lines[i+1]].filter(Boolean);
+        for (const c of candidates) {
+          const mSpaced = c.match(/\b(\d{1,2})\s*[\.:]\s*(\d{2})\s*[\.:]\s*(\d{2})\b/);
+          if (mSpaced) {
+            result.time = `${parseInt(mSpaced[1])}:${mSpaced[2]}:${mSpaced[3]}`;
+            break;
+          }
+          const matches = [...c.matchAll(/\b(?:(\d{1,2}):)?([0-5]\d):([0-5]\d)\b/g)];
+          for (const tm of matches) {
+            if (isClockTime(c, tm.index, tm[0].length)) continue;
+            const norm = tm[1] && tm[1] !== "0" && tm[1] !== "00" ? `${parseInt(tm[1])}:${tm[2]}:${tm[3]}` : `${tm[2]}:${tm[3]}`;
+            if (norm !== result.pace) {
+              result.time = norm;
+              break;
+            }
+          }
+          if (result.time) break;
+        }
+        if (result.time) break;
+      }
+    }
+
+    if (!result.time) {
+      const allMatches = [...clean.matchAll(/\b(?:(\d{1,2}):)?([0-5]\d):([0-5]\d)\b/g)];
+      for (const tm of allMatches) {
+        if (isClockTime(clean, tm.index, tm[0].length)) continue;
+        const norm = tm[1] && tm[1] !== "0" && tm[1] !== "00" ? `${parseInt(tm[1])}:${tm[2]}:${tm[3]}` : `${tm[2]}:${tm[3]}`;
+        if (norm !== result.pace) {
+          result.time = norm;
+          break;
+        }
+      }
+    }
+
+    // 4. Vzdialenosť (km s toleranciou medzier a alternatívnych zápisov)
+    const distPatterns = [
+      /(\d{1,2})[\s.,]+(\d{2})\s*(?:km\b|k\b)/i,
+      /(\d{1,2}[.,]\d{1,2})\s*(?:km\b|k\b)/i,
+      /(\d{1,2})\s*km\b/i
+    ];
+    for (const dp of distPatterns) {
+      const dm = clean.match(dp);
+      if (dm) {
+        if (dm[2] !== undefined && dp === distPatterns[0]) {
+          result.km = parseFloat(`${dm[1]}.${dm[2]}`);
+        } else {
+          result.km = parseFloat(dm[1].replace(",", "."));
+        }
+        break;
+      }
+    }
+
+    if (!result.km) {
+      for (let i = 0; i < lines.length; i++) {
+        if (/distance|vzdialen/i.test(lines[i])) {
+          const candidates = [lines[i-1], lines[i], lines[i+1]].filter(Boolean);
+          for (const c of candidates) {
+            const m1 = c.match(/(\d{1,2})[\s.,](\d{2})/);
+            if (m1) {
+              result.km = parseFloat(`${m1[1]}.${m1[2]}`);
+              break;
+            }
+            const m2 = c.match(/(\d{3,4})\s*m\b/i);
+            if (m2) {
+              result.km = parseFloat((parseInt(m2[1], 10) / 100).toFixed(2));
+              break;
+            }
+          }
+          if (result.km) break;
+        }
+      }
+    }
+
+    // Matematická kontrola a derivácia zo vzťahu Čas / Tempo
+    function timeToSec(t) {
+      if (!t) return 0;
+      const parts = t.split(":").map(Number);
+      if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+      if (parts.length === 2) return parts[0] * 60 + parts[1];
+      return 0;
+    }
+
+    const timeSec = timeToSec(result.time);
+    const paceSec = timeToSec(result.pace);
+
+    if (timeSec > 0 && paceSec > 0) {
+      const mathKm = parseFloat((timeSec / paceSec).toFixed(2));
+      if (!result.km) {
+        result.km = mathKm;
+      } else {
+        const diff = Math.abs(result.km - mathKm);
+        if (diff > 0.4) {
+          result.km = mathKm;
+        }
+      }
+    }
+
+    return result;
+  }
+
+  /* Extrakcia medzičasov jednotlivých km zo Strava screenshotov */
+  function extractStravaSplits(rawText) {
+    if (!rawText || typeof rawText !== "string") return [];
+    const splits = [];
+    const lines = rawText.replace(/\r/g, "\n").split("\n").map(l => l.trim()).filter(Boolean);
+
+    for (const line of lines) {
+      const m = line.match(/^(?:km\s*)?(\b\d{1,2}\b)[.\s:]+([3-9][:’'][0-5]\d)(?:["”])?(?:\s*(?:\/km|min\/km))?/i);
+      if (m) {
+        const kmNum = parseInt(m[1], 10);
+        const paceStr = m[2].replace(/[’']/, ":");
+        if (kmNum > 0 && kmNum <= 50) {
+          if (splits.length === 0 && (kmNum === 1 || kmNum === 2)) {
+            splits.push({ km: kmNum, pace: paceStr });
+          } else if (splits.length > 0 && kmNum === splits[splits.length - 1].km + 1) {
+            splits.push({ km: kmNum, pace: paceStr });
+          }
+        }
+      }
+    }
+
+    if (splits.length < 2) {
+      const altSplits = [];
+      const matches = [...rawText.matchAll(/\b(\d{1,2})\s+([3-9][:’'][0-5]\d)\b/g)];
+      for (const sm of matches) {
+        const kmNum = parseInt(sm[1], 10);
+        const paceStr = sm[2].replace(/[’']/, ":");
+        if (kmNum > 0 && kmNum <= 50) {
+          if (altSplits.length === 0 && kmNum === 1) {
+            altSplits.push({ km: kmNum, pace: paceStr });
+          } else if (altSplits.length > 0 && kmNum === altSplits[altSplits.length - 1].km + 1) {
+            altSplits.push({ km: kmNum, pace: paceStr });
+          }
+        }
+      }
+      if (altSplits.length >= 2) return altSplits;
+    }
+
+    return splits;
+  }
+
+  /* Inteligentné trénerské vyhodnotenie a postrehy z behu a medzičasov */
+  function generateCoachAnalysis(km, timeStr, paceStr, splits = []) {
+    if (!km || !timeStr) return "";
+
+    const timeParts = timeStr.split(":").map(Number);
+    const totalSec = timeParts.length === 3 ? timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2] : timeParts[0] * 60 + timeParts[1];
+    const avgPaceSec = Math.round(totalSec / km);
+    const computedPace = fmtPace(totalSec, km);
+    const actualPace = paceStr || computedPace;
+
+    let zoneText = "";
+    if (avgPaceSec >= 360) {
+      zoneText = "Tréning v regeneračnom a aeróbnom pásme Z2 (ľahký vytrvalostný beh). Výborne zvládnutá kontrola intenzity – beh v tomto tempe buduje hustotu kapilár, šetrí svalový glykogén a tvorí kľúčový základ pre polmaratón.";
+    } else if (avgPaceSec >= 300) {
+      zoneText = "Tréning v aeróbno-tempovom pásme Z2/Z3. Veľmi plynulý beh s dobrou ekonomikou pohybu a udržateľnou aeróbnou záťažou.";
+    } else if (avgPaceSec >= 256) {
+      zoneText = "Tréning v pásme Z3/Z4 (tempový prah / cieľové tempo HM 4:16 /km). Kvalitný stimul na posun anaeróbneho prahu a návyk na špecifickú polmaratónsku rýchlosť.";
+    } else {
+      zoneText = "Vysoká rýchlostná intenzita (pásmo Z4/Z5). Efektívny neuromuskulárny stimul, výborná kadencia a odrazová sila.";
+    }
+
+    let pacingAnalysis = "";
+    if (splits && splits.length >= 2) {
+      const splitList = splits.map(s => `${s.km}. km: ${s.pace}`).join(" • ");
+      const half = Math.floor(splits.length / 2);
+      const parseSec = p => { const [m, s] = p.split(":").map(Number); return m * 60 + s; };
+      const firstHalfAvg = splits.slice(0, half).reduce((sum, s) => sum + parseSec(s.pace), 0) / half;
+      const secondHalfAvg = splits.slice(half).reduce((sum, s) => sum + parseSec(s.pace), 0) / (splits.length - half);
+      const diff = firstHalfAvg - secondHalfAvg; // kladné = druhá polovica rýchlejšia (negatívny split)
+
+      if (diff > 4) {
+        pacingAnalysis = `Priebeh tempa (medzičasy: ${splitList}): Negatívny split – druhá polovica behu bola v priemere o ${Math.round(diff)} s/km rýchlejšia ako prvá. Výborná taktická disciplína a ekonomika síl v závere.`;
+      } else if (diff < -6) {
+        pacingAnalysis = `Priebeh tempa (medzičasy: ${splitList}): Pozitívny split – úvod bol svižnejší a v druhej polovici prišlo k miernemu spomaleniu o ${Math.round(Math.abs(diff))} s/km. Do budúcna odporúčam začať úvodný kilometer o 10–15 s pomalšie a postupne tempo gradovať.`;
+      } else {
+        pacingAnalysis = `Priebeh tempa (medzičasy: ${splitList}): Mimoriadne vyrovnané a stabilné tempo počas celého behu (rozptyl tempa len ${Math.round(Math.abs(diff))} s/km). Skvelá rytmická konzistencia.`;
+      }
+    } else {
+      pacingAnalysis = `Priebeh tempa: Priemerné tempo ${actualPace} /km bolo rovnomerne udržané po celej dĺžke ${km.toFixed(2)} km.`;
+    }
+
+    let recoveryRec = "";
+    if (km >= 8) {
+      recoveryRec = "Odporúčanie trénera: Vyšší objem – zamerať sa na hydratáciu, doplnenie sacharidov a 10 min statického strečingu lýtok a hamstringov.";
+    } else if (avgPaceSec <= 280) {
+      recoveryRec = "Odporúčanie trénera: Po rýchlejšom tréningu zaradiť večernú ľahkú mobilitu bedier a v nasledujúci deň striktne oddychovať alebo zvoliť regeneračnú prechádzku.";
+    } else {
+      recoveryRec = "Odporúčanie trénera: Telo reaguje na aeróbnu adaptáciu výborne. V nasledujúcom tréningu pokračovať presne podľa stanoveného plánu.";
+    }
+
+    return `Celkové dáta: ${km.toFixed(2)} km za ${timeStr} (tempo ${actualPace} /km)\n${zoneText}\n${pacingAnalysis}\n${recoveryRec}`;
+  }
+
+  /* Automatické prispôsobenie výšky textarey podľa počtu riadkov (autolayout bez nutnosti scrollovania) */
+  function autoResizeTextarea(textarea) {
+    if (!textarea) return;
+    const prevScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    textarea.style.height = "auto";
+    const borderOffset = textarea.offsetHeight - textarea.clientHeight;
+    const newHeight = textarea.scrollHeight + borderOffset;
+    const minHeight = window.innerWidth <= 768 ? 44 : 52;
+    textarea.style.height = Math.max(newHeight, minHeight) + "px";
+    if (window.pageYOffset !== prevScrollTop) {
+      window.scrollTo(0, prevScrollTop);
+    }
+  }
+
+  function bindCardEvents(cardId, getTargetObj, saveCallback) {
+    const cardEl = document.getElementById("card-" + cardId);
+    if (!cardEl) return;
+
+    const notesInput = cardEl.querySelector('textarea[data-key="notes"]');
+    if (notesInput) {
+      autoResizeTextarea(notesInput);
+      notesInput.addEventListener("input", () => autoResizeTextarea(notesInput));
+    }
+
+    cardEl.querySelectorAll("[data-key]").forEach(input => {
+      const eventName = (input.type === "checkbox" || input.type === "date" || input.tagName === "SELECT") ? "change" : "input";
+      input.addEventListener(eventName, () => {
+        const obj = getTargetObj();
+        const key = input.dataset.key;
+        obj[key] = (input.type === "checkbox") ? input.checked : input.value;
+
+        if (key === "done") {
+          cardEl.querySelectorAll('[data-key="done"]').forEach(chk => { chk.checked = !!obj.done; });
+          cardEl.querySelectorAll('.custom-checkbox-wrap').forEach(wrap => { wrap.classList.toggle('checked', !!obj.done); });
+          cardEl.classList.toggle("done", !!obj.done);
+          toast(obj.done ? "Tréning splnený." : "Záznam zrušený.");
+        }
+
+        if (key === "km" || key === "time") {
+          const paceEl = cardEl.querySelector("[data-calc-pace]");
+          if (paceEl) paceEl.textContent = fmtPace(parseTime(obj.time), parseFloat(obj.km));
+
+          if (obj.km && obj.time && !obj.done) {
+            obj.done = true;
+            cardEl.querySelectorAll('[data-key="done"]').forEach(chk => { chk.checked = true; });
+            cardEl.querySelectorAll('.custom-checkbox-wrap').forEach(wrap => { wrap.classList.add('checked'); });
+            cardEl.classList.add("done");
+          }
+        }
+
+        saveCallback();
+        updateWeekStripStatus();
+        updateWeekDeltaMeta();
+        renderHero();
+      });
+    });
+
+    const uploadInput = cardEl.querySelector("[data-upload-shot]");
+    if (uploadInput) {
+      uploadInput.addEventListener("change", async () => {
+        if (!DB.db) {
+          alert("Ukladanie obrázkov nie je v tomto prehliadači podporované.");
+          return;
+        }
+        if (!uploadInput.files.length) return;
+        const obj = getTargetObj();
+        obj.shots = obj.shots || [];
+        const statusText = cardEl.querySelector("[data-upload-text]");
+        const originalText = statusText ? statusText.textContent : "Nahrať screenshot zo Stravy";
+        if (statusText) statusText.textContent = "Analyzujem screenshoty (OCR)...";
+        toast("Prebieha analýza screenshotov...");
+
+        let autoExtracted = false;
+        const allOcrTexts = [];
+        const accumulatedSplits = [];
+
+        for (const file of uploadInput.files) {
+          try {
+            const compressed = await compressImage(file);
+            const shotId = "shot-" + uid();
+            await DB.put(shotId, compressed);
+            obj.shots.push(shotId);
+
+            if (window.Tesseract) {
+              try {
+                const ocrRes = await Tesseract.recognize(file, 'eng');
+                const text = ocrRes?.data?.text || "";
+                allOcrTexts.push(text);
+
+                const splitsInImg = extractStravaSplits(text);
+                if (splitsInImg && splitsInImg.length) {
+                  accumulatedSplits.push(...splitsInImg);
+                }
+              } catch (ocrErr) {
+                console.warn("OCR analýza zlyhala:", ocrErr);
+              }
+            }
+          } catch(err) {
+            console.error(err);
+          }
+        }
+
+        const combinedText = allOcrTexts.join("\n\n");
+        const parsed = parseStravaText(combinedText);
+
+        let finalSplits = [];
+        if (accumulatedSplits.length) {
+          const splitMap = new Map();
+          accumulatedSplits.forEach(s => {
+            if (!splitMap.has(s.km)) splitMap.set(s.km, s.pace);
+          });
+          const sortedKms = [...splitMap.keys()].sort((a, b) => a - b);
+          finalSplits = sortedKms.map(k => ({ km: k, pace: splitMap.get(k) }));
+        }
+
+        if (parsed.km != null) {
+          obj.km = typeof parsed.km === "number" ? parsed.km.toFixed(2) : String(parsed.km);
+          const kmInput = cardEl.querySelector('[data-key="km"]');
+          if (kmInput) kmInput.value = obj.km;
+          autoExtracted = true;
+        }
+
+        if (parsed.time) {
+          obj.time = parsed.time;
+          const timeInput = cardEl.querySelector('[data-key="time"]');
+          if (timeInput) timeInput.value = obj.time;
+          autoExtracted = true;
+        }
+
+        if (parsed.date) {
+          obj.date = parsed.date;
+          const dateInput = cardEl.querySelector('[data-key="date"]');
+          if (dateInput) dateInput.value = obj.date;
+        }
+
+        if (obj.km && obj.time) {
+          const paceEl = cardEl.querySelector("[data-calc-pace]");
+          const calcP = fmtPace(parseTime(obj.time), parseFloat(obj.km));
+          if (paceEl) paceEl.textContent = calcP;
+
+          const coachNotes = generateCoachAnalysis(parseFloat(obj.km), obj.time, parsed.pace || calcP, finalSplits);
+          if (coachNotes) {
+            obj.notes = coachNotes;
+            const notesEl = cardEl.querySelector('[data-key="notes"]');
+            if (notesEl) {
+              notesEl.value = obj.notes;
+              autoResizeTextarea(notesEl);
+            }
+          }
+        }
+
+        if (!obj.done) {
+          obj.done = true;
+          cardEl.querySelectorAll('[data-key="done"]').forEach(chk => { chk.checked = true; });
+          cardEl.querySelectorAll('.custom-checkbox-wrap').forEach(wrap => { wrap.classList.add('checked'); });
+          cardEl.classList.add("done");
+        }
+
+        saveCallback();
+        uploadInput.value = "";
+        if (statusText) statusText.textContent = originalText;
+        loadSavedShots(cardId, obj.shots);
+
+        if (autoExtracted && obj.km && obj.time) {
+          toast(`Dáta načítané: ${obj.km} km, ${obj.time}. Vyhodnotenie trénera doplnené.`);
+        } else {
+          toast("Screenshot uložený.");
+        }
+        updateWeekStripStatus();
+        renderHero();
+      });
+    }
+
+    const stravaBtn = cardEl.querySelector("[data-btn-strava]");
+    const stravaInput = cardEl.querySelector("[data-strava-input]");
+    if (stravaBtn && stravaInput) {
+      stravaBtn.addEventListener("click", async () => {
+        const url = stravaInput.value.trim();
+        if (!url) {
+          alert("Prosím vlož odkaz na Strava aktivitu.");
+          return;
+        }
+        stravaBtn.disabled = true;
+        stravaBtn.textContent = "Načítavam...";
+        try {
+          const res = await fetch("/api/strava?url=" + encodeURIComponent(url));
+          const data = await res.json();
+          if (!res.ok || data.error) {
+            throw new Error(data.error || "Chyba načítania zo Stravy");
+          }
+
+          const obj = getTargetObj();
+          obj.stravaUrl = data.stravaUrl || url;
+          obj.stravaMapUrl = data.mapUrl;
+          obj.stravaName = data.name;
+          obj.stravaAthlete = data.athlete;
+
+          if (data.date) {
+            obj.date = data.date;
+            const dateInput = cardEl.querySelector('[data-key="date"]');
+            if (dateInput) dateInput.value = data.date;
+          }
+
+          if (data.name && (!obj.notes || !obj.notes.includes(data.name))) {
+            obj.notes = obj.notes ? `${data.name} — ${obj.notes}` : data.name;
+            const notesInput = cardEl.querySelector('[data-key="notes"]');
+            if (notesInput) {
+              notesInput.value = obj.notes;
+              autoResizeTextarea(notesInput);
+            }
+          }
+
+          if (!obj.done) {
+            obj.done = true;
+            const chk = cardEl.querySelector('[data-key="done"]');
+            if (chk) chk.checked = true;
+            cardEl.classList.add("done");
+          }
+
+          saveCallback();
+          toast("Aktivita zo Stravy úspešne prepojená.");
+          renderWeekPlan();
+          renderHero();
+        } catch (err) {
+          alert("Chyba pri načítaní: " + err.message);
+        } finally {
+          stravaBtn.disabled = false;
+          stravaBtn.textContent = "Načítať zo Stravy";
+        }
+      });
+    }
+
+    const zoomMapEl = cardEl.querySelector("[data-zoom-map]");
+    if (zoomMapEl) {
+      zoomMapEl.addEventListener("click", () => {
+        $("#lightboxImg").src = zoomMapEl.dataset.zoomMap;
+        $("#lightboxView").style.display = "flex";
+      });
+    }
+
+    cardEl._getTargetObj = getTargetObj;
+    cardEl._saveCallback = saveCallback;
+  }
+
+  async function loadSavedShots(cardId, shotIds) {
+    const cardEl = document.getElementById("card-" + cardId);
+    if (!cardEl) return;
+    const container = cardEl.querySelector("[data-shots-container]");
+    if (!container) return;
+
+    container.innerHTML = "";
+    if (!shotIds || !shotIds.length) return;
+
+    const count = shotIds.length;
+    const word = count === 1 ? "screenshot" : (count >= 2 && count <= 4 ? "screenshoty" : "screenshotov");
+    const badge = document.createElement("div");
+    badge.className = "attachment-status-badge";
+    badge.innerHTML = `
+      <svg class="attachment-check-svg" viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span class="attachment-text">Príloha nahratá (${count} ${word})</span>
+      <button type="button" class="attachment-btn-view" title="Zobraziť screenshot">Náhľad</button>
+      <button type="button" class="attachment-btn-del" title="Odstrániť prílohy">&times;</button>
+    `;
+
+    badge.querySelector(".attachment-btn-view").onclick = async () => {
+      for (const sid of shotIds) {
+        const dataUrl = await DB.get(sid);
+        if (dataUrl) {
+          $("#lightboxImg").src = dataUrl;
+          $("#lightboxView").style.display = "flex";
+          break;
+        }
+      }
+    };
+
+    badge.querySelector(".attachment-btn-del").onclick = async e => {
+      e.stopPropagation();
+      if (!confirm("Odstrániť prílohy k tomuto behu?")) return;
+      const obj = cardEl._getTargetObj ? cardEl._getTargetObj() : null;
+      if (obj) {
+        for (const sid of shotIds) await DB.del(sid);
+        obj.shots = [];
+        if (cardEl._saveCallback) cardEl._saveCallback();
+      }
+      badge.remove();
+      toast("Príloha bola odstránená.");
+    };
+
+    container.appendChild(badge);
+  }
+
+  function compressImage(file) {
+    return new Promise((res, rej) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        const max = 1400;
+        const scale = Math.min(1, max / Math.max(img.width, img.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+        res(canvas.toDataURL("image/jpeg", 0.84));
+      };
+      img.onerror = rej;
+      img.src = url;
+    });
+  }
+
+  function renderExtrasList() {
+    const w = T.weeks[currentWeekIdx];
+    const list = extras.filter(e => e.date >= w.start && e.date <= w.end);
+    const container = $("#extrasContainer");
+    if (!list.length) {
+      container.innerHTML = `<div class="font-secondary" style="font-size:13.5px; color:var(--text-muted);">Žiadne doplnkové behy v tomto týždni.</div>`;
+      return;
+    }
+    container.innerHTML = list.map(e => `
+      <div class="workout-card done extra-workout-card" id="card-${e.id}">
+        <div class="extra-card-head">
+          <div class="extra-card-top-row">
+            <span class="workout-meta-tag">Doplnkový beh</span>
+            <button type="button" class="btn-extra-del" data-btn-del="${e.id}">Vymazať</button>
+          </div>
+          <div class="extra-card-name-wrap">
+            <input type="text" class="field-input-box extra-name-input" data-key="name" value="${esc(e.name || "")}" placeholder="Názov behu (napr. Beh s priateľmi)">
+          </div>
+        </div>
+        ${formLogHtml(e, true, false)}
+      </div>
+    `).join("");
+
+    list.forEach(e => {
+      bindCardEvents(e.id, () => extras.find(x => x.id === e.id), saveExtras);
+      loadSavedShots(e.id, e.shots || []);
+    });
+
+    container.querySelectorAll("[data-btn-del]").forEach(btn => {
+      btn.onclick = async () => {
+        if (!confirm("Vymazať tento doplnkový beh?")) return;
+        const item = extras.find(x => x.id === btn.dataset.btnDel);
+        if (item && item.shots) {
+          for (const s of item.shots) await DB.del(s);
+        }
+        extras = extras.filter(x => x.id !== btn.dataset.btnDel);
+        saveExtras();
+        renderExtrasList();
+        renderHero();
+      };
+    });
+  }
+
+  $("#btnAddExtra").onclick = () => {
+    const w = T.weeks[currentWeekIdx];
+    const today = getTodayStr();
+    const dStr = (today >= w.start && today <= w.end) ? today : w.start;
+    extras.push({ id: "extra-" + uid(), date: dStr, done: true, shots: [] });
+    saveExtras();
+    renderExtrasList();
+  };
+
+  function updateWeekStripStatus() {
+    const w = T.weeks[currentWeekIdx];
+    const checkArrowSvg = `<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+    $("#weekStrip").querySelectorAll(".strip-item").forEach(el => {
+      const jId = el.dataset.jump;
+      const done = logs[jId]?.done;
+      el.classList.toggle("done", !!done);
+      el.querySelector(".strip-day-status").innerHTML = done ? checkArrowSvg : "—";
+    });
+  }
+
+  /* TAB 2: PROGRES A GRAFY */
+  function renderProgressTab() {
+    const all = getAllRuns();
+    const totalKm = all.reduce((sum, r) => sum + r.km, 0);
+    const maxKm = all.reduce((max, r) => Math.max(max, r.km), 0);
+
+    $("#progressSummaryMetrics").innerHTML = `
+      <div class="metric-card">
+        <div class="metric-label">Celkový objem</div>
+        <div class="metric-value">${fmtKm(totalKm)}</div>
+        <div class="metric-sub">${fmtRuns(all.length)}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Najdlhší beh</div>
+        <div class="metric-value">${fmtKm(maxKm)}</div>
+        <div class="metric-sub">vytrvalostný strop</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Najlepšia 5 km</div>
+        <div class="metric-value">23:17</div>
+        <div class="metric-sub">tempo 4:40 /km (17. 8. 2026)</div>
+      </div>
+    `;
+
+    const weekMap = {};
+    const weekStats = {};
+    all.forEach(r => {
+      const dObj = toDate(r.date);
+      const day = (dObj.getDay() + 6) % 7;
+      dObj.setDate(dObj.getDate() - day);
+      const mStr = dObj.toISOString().slice(0, 10);
+      weekMap[mStr] = (weekMap[mStr] || 0) + r.km;
+
+      if (!weekStats[mStr]) {
+        const endD = new Date(dObj);
+        endD.setDate(endD.getDate() + 6);
+        weekStats[mStr] = {
+          start: mStr,
+          end: endD.toISOString().slice(0, 10),
+          count: 0,
+          km: 0,
+          sec: 0
+        };
+      }
+      weekStats[mStr].count++;
+      weekStats[mStr].km += r.km;
+      weekStats[mStr].sec += r.sec;
+    });
+    const weekKeys = Object.keys(weekMap).sort();
+    const chartData = weekKeys.map(k => [k, weekMap[k]]);
+    $("#chartVolumeSvg").innerHTML = renderMonochromeBarChart(chartData);
+    $("#chartPaceSvg").innerHTML = renderMonochromePaceChart(all);
+    requestAnimationFrame(() => {
+      document.querySelectorAll(".chart-scroll-container").forEach(el => {
+        el.scrollLeft = el.scrollWidth;
+      });
+    });
+
+    const weeklySummaryList = Object.values(weekStats).sort((a, b) => b.start.localeCompare(a.start));
+    $("#tableWeeklySummary").innerHTML = `
+      <thead>
+        <tr>
+          <th>Týždeň</th>
+          <th>Počet behov</th>
+          <th>Týždenný objem</th>
+          <th>Celkový čas</th>
+          <th>Priemerné tempo</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${weeklySummaryList.map(ws => `
+          <tr>
+            <td>${fmtDateShort(ws.start)} – ${fmtDateShort(ws.end)}</td>
+            <td><strong>${fmtRuns(ws.count)}</strong></td>
+            <td>${fmtKm(ws.km)}</td>
+            <td>${fmtTime(ws.sec)}</td>
+            <td><strong>${fmtPace(ws.sec, ws.km)} /km</strong></td>
+          </tr>
+        `).join("")}
+      </tbody>
+    `;
+
+    $("#tablePrs").innerHTML = `
+      <thead>
+        <tr>
+          <th>Dátum</th>
+          <th>Disciplína / PR</th>
+          <th>Vzdialenosť</th>
+          <th>Dosiahnutý čas</th>
+          <th>Priemerné tempo</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${T.prs.map(p => {
+          const distKm = { "400 m": 0.4, "1 km": 1.0, "5 km": 5.0, "10 km": 10.0 }[p.dist] || 0;
+          return `
+            <tr>
+              <td>${fmtDateFull(p.date)}</td>
+              <td><strong>${esc(p.dist)}</strong></td>
+              <td>${distKm ? (distKm >= 1 ? fmtKm(distKm) : (distKm * 1000) + " m") : "—"}</td>
+              <td>${esc(p.time)}</td>
+              <td><strong>${distKm ? fmtPace(parseTime(p.time), distKm) + " /km" : "—"}</strong></td>
+            </tr>
+          `;
+        }).join("")}
+      </tbody>
+    `;
+
+    const milestonesEl = $("#tableMilestones");
+    if (milestonesEl) {
+      milestonesEl.innerHTML = `
+        <thead>
+          <tr>
+            <th>Termín</th>
+            <th>Cieľový míľnik</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${T.milestones.map(m => `
+            <tr>
+              <td><strong>${esc(m.when)}</strong></td>
+              <td>${esc(m.text)}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      `;
+    }
+
+    const gearList = (T.gear && T.gear.shoes) ? T.gear.shoes : [];
+    const gearEl = $("#gearContainer");
+    if (gearEl) {
+      gearEl.innerHTML = gearList.map(s => {
+        const currentKm = totalKm;
+        const pct = Math.min(100, Math.round((currentKm / s.maxRecommendedKm) * 100));
+        return `
+          <div class="gear-card">
+            <div class="gear-header">
+              <div class="gear-title-wrap">
+                <span class="gear-name">${esc(s.name)}</span>
+                <span class="gear-type">${esc(s.type)}</span>
+              </div>
+              <div class="gear-km-badge">${fmtKm(currentKm)} / ${s.maxRecommendedKm} km (${pct} %)</div>
+            </div>
+            <div class="gear-progress-track">
+              <div class="gear-progress-bar" style="width: ${pct}%;"></div>
+            </div>
+            <div class="gear-meta-grid">
+              <div class="gear-meta-item">
+                <span class="gear-meta-label">Drop</span>
+                <span class="gear-meta-val">${s.dropMm} mm</span>
+              </div>
+              <div class="gear-meta-item">
+                <span class="gear-meta-label">Hmotnosť</span>
+                <span class="gear-meta-val">${s.weightG} g</span>
+              </div>
+              <div class="gear-meta-item">
+                <span class="gear-meta-label">Životnosť peny</span>
+                <span class="gear-meta-val">cca ${s.maxRecommendedKm} km</span>
+              </div>
+              <div class="gear-meta-item">
+                <span class="gear-meta-label">Status</span>
+                <span class="gear-meta-val">${esc(s.status)}</span>
+              </div>
+            </div>
+            ${s.notes ? `<div class="gear-notes">${esc(s.notes)}</div>` : ""}
+          </div>
+        `;
+      }).join("");
+    }
+
+    renderAllRunsTable();
+    initSyncTablesScroll();
+  }
+
+  let syncScrollInitialized = false;
+  function initSyncTablesScroll() {
+    if (syncScrollInitialized) return;
+    syncScrollInitialized = true;
+    const containers = document.querySelectorAll("#view-progress .table-container");
+    let isSyncing = false;
+    containers.forEach(cont => {
+      cont.addEventListener("scroll", () => {
+        if (isSyncing) return;
+        isSyncing = true;
+        const sLeft = cont.scrollLeft;
+        containers.forEach(c => {
+          if (c !== cont) c.scrollLeft = sLeft;
+        });
+        requestAnimationFrame(() => { isSyncing = false; });
+      }, { passive: true });
+    });
+  }
+
+  let currentRunFilter = "all";
+
+  function renderAllRunsTable() {
+    const all = getAllRuns();
+    let filtered = all.slice().reverse();
+    if (currentRunFilter === "interval") {
+      filtered = filtered.filter(r => r.type === "interval" || r.type === "tempo" || (r.name && (r.name.toLowerCase().includes("dráha") || r.name.toLowerCase().includes("úsek") || r.name.toLowerCase().includes("tempo"))));
+    } else if (currentRunFilter === "easy") {
+      filtered = filtered.filter(r => r.type === "easy" || r.type === "recovery" || (r.name && (r.name.toLowerCase().includes("ľahký") || r.name.toLowerCase().includes("regeneračný") || r.name.toLowerCase().includes("klusal"))));
+    } else if (currentRunFilter === "long") {
+      filtered = filtered.filter(r => r.type === "long" || r.km >= 9.5 || (r.name && r.name.toLowerCase().includes("dlhý")));
+    }
+
+    const tableEl = $("#tableAllRuns");
+    if (!tableEl) return;
+    if (!filtered.length) {
+      tableEl.innerHTML = `<tbody><tr><td colspan="5" class="secondary" style="text-align:center; padding: 24px 0;">Žiadne behy vo vybranom filtri.</td></tr></tbody>`;
+      return;
+    }
+
+    tableEl.innerHTML = `
+      <thead>
+        <tr>
+          <th>Dátum</th>
+          <th>Názov / Typ</th>
+          <th>Vzdialenosť</th>
+          <th>Čas</th>
+          <th>Tempo</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${filtered.map(r => {
+          const l = Object.values(logs).find(x => x.date === r.date) || extras.find(x => x.date === r.date);
+          const rpeBadge = l && l.rpe ? ` <span style="font-size:10px; font-weight:600; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; padding:1px 5px; margin-left:4px;">RPE ${l.rpe}</span>` : "";
+          return `
+            <tr>
+              <td>${fmtDateFull(r.date)}</td>
+              <td><strong>${esc(r.name)}</strong>${rpeBadge}</td>
+              <td>${fmtKm(r.km)}</td>
+              <td>${fmtTime(r.sec)}</td>
+              <td><strong>${fmtPace(r.sec, r.km)} /km</strong></td>
+            </tr>
+          `;
+        }).join("")}
+      </tbody>
+    `;
+  }
+
+  document.querySelectorAll("#runsFilterBar .filter-pill").forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll("#runsFilterBar .filter-pill").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentRunFilter = btn.dataset.filter;
+      renderAllRunsTable();
+    };
+  });
+
+  function renderMonochromeBarChart(data) {
+    if (!data.length) return `<div class="font-secondary" style="font-size:13px; color:var(--text-muted); padding: 24px 0;">Zatiaľ žiadne dáta.</div>`;
+    const W = 1000;
+    const H = 230;
+    const padLeft = 48;
+    const padRight = 24;
+    const padBottom = 34;
+    const padTop = 26;
+    const maxVal = Math.max(12, ...data.map(d => d[1])) * 1.15;
+    const chartW = W - padLeft - padRight;
+    const barWidth = chartW / data.length;
+
+    let svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}">`;
+    for (let g = 0; g <= maxVal; g += 10) {
+      const y = H - padBottom - (g / maxVal) * (H - padBottom - padTop);
+      svg += `<line x1="${padLeft}" x2="${W - padRight}" y1="${y}" y2="${y}" stroke="#232328" stroke-width="1"/>`;
+      svg += `<text x="${padLeft - 10}" y="${y + 4}" fill="#71717a" font-size="11" text-anchor="end">${g}</text>`;
+    }
+    data.forEach(([k, val], i) => {
+      const h = (val / maxVal) * (H - padBottom - padTop);
+      const x = padLeft + i * barWidth + Math.max(3, barWidth * 0.16);
+      const w = Math.max(6, barWidth * 0.68);
+      const y = H - padBottom - h;
+      svg += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#f5f5f7" rx="2.5"/>`;
+      if (val > 0) {
+        svg += `<text x="${x + w / 2}" y="${y - 8}" fill="#f5f5f7" font-size="11.5" font-weight="600" text-anchor="middle">${val.toFixed(1).replace(".", ",")}</text>`;
+      }
+      svg += `<text x="${x + w / 2}" y="${H - 12}" fill="#8e8e93" font-size="11" text-anchor="middle">${fmtDateShort(k)}</text>`;
+    });
+    return svg + `</svg>`;
+  }
+
+  function renderMonochromePaceChart(runs) {
+    if (runs.length < 2) return `<div class="font-secondary" style="font-size:13px; color:var(--text-muted); padding: 24px 0;">Zatiaľ nedostatok behov na vykreslenie krivky.</div>`;
+    const W = 1000;
+    const H = 230;
+    const padLeft = 52;
+    const padRight = 32;
+    const padBottom = 34;
+    const padTop = 26;
+
+    const paces = runs.map(r => r.sec / r.km);
+    const minPace = Math.min(250, ...paces) - 10;
+    const maxPace = Math.max(...paces) + 15;
+
+    const getX = i => padLeft + i * (W - padLeft - padRight) / (runs.length - 1);
+    const getY = p => padTop + (p - minPace) / (maxPace - minPace) * (H - padBottom - padTop);
+
+    let svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}">`;
+
+    for (let p = Math.ceil(minPace / 30) * 30; p <= maxPace; p += 30) {
+      const y = getY(p);
+      svg += `<line x1="${padLeft}" x2="${W - padRight}" y1="${y}" y2="${y}" stroke="#232328" stroke-width="1"/>`;
+      svg += `<text x="${padLeft - 10}" y="${y + 4}" fill="#71717a" font-size="11" text-anchor="end">${fmtTime(p)}</text>`;
+    }
+
+    const targetY = getY(256);
+    svg += `<line x1="${padLeft}" x2="${W - padRight}" y1="${targetY}" y2="${targetY}" stroke="#ffffff" stroke-dasharray="4 4" stroke-width="1.25"/>`;
+    svg += `<text x="${W - padRight}" y="${targetY - 8}" fill="#ffffff" font-size="11.5" font-weight="600" text-anchor="end">Cieľ 4:16</text>`;
+
+    const points = runs.map((r, i) => `${getX(i).toFixed(1)},${getY(paces[i]).toFixed(1)}`).join(" ");
+    svg += `<polyline fill="none" stroke="#f5f5f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>`;
+
+    runs.forEach((r, i) => {
+      const cx = getX(i);
+      const cy = getY(paces[i]);
+      svg += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="#0c0c0e" stroke="#ffffff" stroke-width="2">
+        <title>${fmtDateFull(r.date)} — ${r.name}\n${r.km.toFixed(2)} km, tempo ${fmtPace(r.sec, r.km)} /km</title>
+      </circle>`;
+      const step = runs.length > 20 ? 2 : 1;
+      if (i % step === 0 || i === runs.length - 1) {
+        svg += `<text x="${cx.toFixed(1)}" y="${H - 12}" fill="#8e8e93" font-size="11" text-anchor="middle">${fmtDateShort(r.date)}</text>`;
+      }
+    });
+
+    return svg + `</svg>`;
+  }
+
+  /* TAB 3: KNIŽNICA CVIKOV */
+  function renderLibraryTab() {
+    $("#tablePaces").innerHTML = `
+      <thead>
+        <tr>
+          <th>Zóna</th>
+          <th>Predpísané tempo</th>
+          <th>Charakteristika a pocit</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${T.paces.map(p => `
+          <tr>
+            <td><strong>${esc(p.zone)}</strong></td>
+            <td><strong>${esc(p.pace)}</strong></td>
+            <td class="secondary">${esc(p.feel)}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    `;
+
+    $("#libraryContainer").innerHTML = Object.entries(T.library).map(([key, item]) => `
+      <div class="lib-block" id="lib-${key}">
+        <h3>${esc(item.title)}</h3>
+        <div class="lib-block-meta">Časová náročnosť: ${esc(item.duration)}</div>
+        <div class="table-container">
+          <table class="editorial-table table-3col">
+            <thead>
+              <tr>
+                <th>Cvik / Aktivita</th>
+                <th>Dávkovanie</th>
+                <th>Technická poznámka</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${item.items.map(it => `
+                <tr>
+                  <td><strong>${esc(it[0])}</strong></td>
+                  <td>${esc(it[1])}</td>
+                  <td class="secondary">${esc(it[2])}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  /* TAB 4: REPORT A ZÁLOHA */
+  function generateWeeklyReportText() {
+    const w = T.weeks[currentWeekIdx];
+    const lines = [
+      `REPORT — TÝŽDEŇ ${w.number} (${fmtDateFull(w.start)} – ${fmtDateFull(w.end)})`,
+      `Fáza: ${w.phase}`,
+      ""
+    ];
+
+    let totalDoneKm = 0;
+    w.workouts.forEach(wo => {
+      if (wo.type === "rest") return;
+      const l = logs[wo.id] || {};
+      const statusText = l.done ? "[SPLNENÉ]" : "[NESPLNENÉ]";
+      let line = `${statusText} ${wo.day} (${fmtDateShort(wo.date)}) — ${wo.title}`;
+      if (wo.type !== "strength" && wo.type !== "mobility" && l.km && l.time) {
+        totalDoneKm += parseFloat(l.km);
+        line += ` | ${l.km} km, čas ${l.time} (tempo ${fmtPace(parseTime(l.time), parseFloat(l.km))} /km)`;
+        if (l.shots && l.shots.length) line += ` [screenshotov: ${l.shots.length}]`;
+      }
+      lines.push(line);
+      if (l.notes) lines.push(`   Poznámka: ${l.notes.replace(/\n/g, " ")}`);
+    });
+
+    const currentExtras = extras.filter(e => e.date >= w.start && e.date <= w.end);
+    if (currentExtras.length) {
+      lines.push("", "Doplnkové behy mimo plánu:");
+      currentExtras.forEach(e => {
+        totalDoneKm += parseFloat(e.km) || 0;
+        lines.push(`+ ${fmtDateShort(e.date)} — ${e.name || "Beh"} | ${e.km || "?"} km, čas ${e.time || "?"} (tempo ${fmtPace(parseTime(e.time), parseFloat(e.km))} /km)`);
+        if (e.notes) lines.push(`   Poznámka: ${e.notes.replace(/\n/g, " ")}`);
+      });
+    }
+
+    lines.push(
+      "",
+      `Spolu odbehnuté: ${totalDoneKm.toFixed(1)} km (predpísaný plán: ${w.targetKm} km)`,
+      `Aktuálny odhad polmaratónu: ${fmtTime(getCurrentEstimate())} (tempo ${fmtPace(getCurrentEstimate(), 21.0975)} /km)`
+    );
+
+    return lines.join("\n");
+  }
+
+  $("#btnCopyReport").onclick = async () => {
+    const text = generateWeeklyReportText();
+    const ta = $("#reportOutput");
+    ta.style.display = "block";
+    ta.value = text;
+    try {
+      await navigator.clipboard.writeText(text);
+      toast("Report bol skopírovaný do schránky.");
+    } catch(e) {
+      ta.select();
+      document.execCommand("copy");
+      toast("Report bol skopírovaný do schránky.");
+    }
+  };
+
+  $("#btnExportJson").onclick = async () => {
+    const shotsData = {};
+    const allShotIds = [
+      ...Object.values(logs).flatMap(l => l.shots || []),
+      ...extras.flatMap(e => e.shots || [])
+    ];
+    if (DB.db) {
+      for (const sid of allShotIds) {
+        const val = await DB.get(sid);
+        if (val) shotsData[sid] = val;
+      }
+    }
+    const backupObj = {
+      version: 2,
+      exportedAt: new Date().toISOString(),
+      logs,
+      extras,
+      settings,
+      shots: shotsData
+    };
+    const blob = new Blob([JSON.stringify(backupObj)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "treningovy-dennik-zaloha-" + getTodayStr() + ".json";
+    a.click();
+    toast("Záloha bola stiahnutá.");
+  };
+
+  const btnExportCsv = $("#btnExportCsv");
+  if (btnExportCsv) {
+    btnExportCsv.onclick = () => {
+      const all = getAllRuns();
+      const csvHeader = "Dátum;Názov;Typ;Vzdialenosť (km);Čas;Tempo (min/km);Úsilie (RPE);Poznámka\n";
+      const csvRows = all.map(r => {
+        const paceStr = fmtPace(r.sec, r.km);
+        const l = Object.values(logs).find(x => x.date === r.date) || extras.find(x => x.date === r.date) || {};
+        const rpeStr = l.rpe || "";
+        const noteStr = (l.notes || "").replace(/[\r\n]+/g, " ").replace(/;/g, ",");
+        return `${r.date};"${(r.name || "").replace(/"/g, '""')}";${r.type || ""};${r.km.toFixed(2).replace(".", ",")};${fmtTime(r.sec)};${paceStr};${rpeStr};"${noteStr.replace(/"/g, '""')}"`;
+      }).join("\n");
+      const blob = new Blob(["\uFEFF" + csvHeader + csvRows], { type: "text/csv;charset=utf-8;" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "polmaraton-behy-" + getTodayStr() + ".csv";
+      a.click();
+      toast("Zoznam behov bol exportovaný do CSV.");
+    };
+  }
+
+  $("#fileImportJson").onchange = async ev => {
+    const file = ev.target.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      if (!confirm("Obnoviť dáta zo zálohy? Súčasné záznamy v tomto prehliadači budú prepísané.")) return;
+      logs = data.logs || {};
+      extras = data.extras || [];
+      settings = data.settings || {};
+      saveLogs();
+      saveExtras();
+      LS.set("beh.settings", settings);
+      if (DB.db && data.shots) {
+        for (const [sid, val] of Object.entries(data.shots)) {
+          await DB.put(sid, val);
+        }
+      }
+      toast("Dáta boli úspešne obnovené.");
+      renderAll();
+    } catch(err) {
+      alert("Neplatný formát záložného súboru.");
+    }
+    ev.target.value = "";
+  };
+
+  if (!settings.raceDate || (settings.raceDate.startsWith("2027-10") && settings.raceDate !== "2027-10-03")) {
+    settings.raceDate = "2027-10-03";
+    LS.set("beh.settings", settings);
+  }
+  $("#inputRaceDate").value = settings.raceDate || T.goal.raceDate;
+  $("#inputRaceDate").onchange = e => {
+    settings.raceDate = e.target.value;
+    LS.set("beh.settings", settings);
+    renderHero();
+  };
+
+  $("#btnPrevWeek").onclick = () => {
+    if (currentWeekIdx > 0) { currentWeekIdx--; renderWeekPlan(); }
+  };
+  $("#btnNextWeek").onclick = () => {
+    if (currentWeekIdx < T.weeks.length - 1) { currentWeekIdx++; renderWeekPlan(); }
+  };
+  $("#weekStrip").addEventListener("click", e => {
+    const target = e.target.closest("[data-jump]");
+    if (target) {
+      document.getElementById("card-" + target.dataset.jump)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+
+  function switchTab(tabId) {
+    document.querySelectorAll(".nav-pill").forEach(t => {
+      t.classList.toggle("active", t.dataset.tab === tabId);
+    });
+    document.querySelectorAll(".mobile-menu-item").forEach(t => {
+      t.classList.toggle("active", t.dataset.tab === tabId);
+    });
+    document.querySelectorAll(".tab-view").forEach(p => p.classList.remove("active"));
+    const targetView = document.getElementById("view-" + tabId);
+    if (targetView) targetView.classList.add("active");
+    if (tabId === "progress") renderProgressTab();
+    closeMobileMenu();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const siteHeaderEl = document.querySelector(".site-header");
+    if (siteHeaderEl) {
+      siteHeaderEl.classList.remove("header-pinned", "header-hidden");
+    }
+    lastScrollY = 0;
+  }
+
+  function closeMobileMenu() {
+    const trigger = document.getElementById("mobileMenuTrigger");
+    const dropdown = document.getElementById("mobileMenuDropdown");
+    if (trigger) {
+      trigger.classList.remove("open");
+      trigger.setAttribute("aria-expanded", "false");
+    }
+    if (dropdown) dropdown.classList.remove("open");
+  }
+
+  function toggleMobileMenu(e) {
+    if (e) e.stopPropagation();
+    const trigger = document.getElementById("mobileMenuTrigger");
+    const dropdown = document.getElementById("mobileMenuDropdown");
+    if (!trigger || !dropdown) return;
+    const isOpen = dropdown.classList.contains("open");
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      trigger.classList.add("open");
+      trigger.setAttribute("aria-expanded", "true");
+      dropdown.classList.add("open");
+    }
+  }
+
+  const mobileTriggerEl = document.getElementById("mobileMenuTrigger");
+  if (mobileTriggerEl) {
+    mobileTriggerEl.onclick = toggleMobileMenu;
+  }
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".mobile-nav-container")) {
+      closeMobileMenu();
+    }
+  });
+
+  document.querySelectorAll(".nav-pill, .mobile-menu-item").forEach(tab => {
+    tab.onclick = () => {
+      switchTab(tab.dataset.tab);
+    };
+  });
+
+  // Inteligentná sticky hlavička pre mobilné zariadenia
+  // Pri scrollovaní nadol sa schová, pri scrollovaní nahor sa okamžite vysunie a pripne
+  let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  let scrollTicking = false;
+  const siteHeaderEl = document.querySelector(".site-header");
+
+  function handleSmartHeader() {
+    if (!siteHeaderEl || window.innerWidth > 768) {
+      scrollTicking = false;
+      return;
+    }
+    const currentScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const delta = currentScrollY - lastScrollY;
+
+    if (currentScrollY <= 24) {
+      siteHeaderEl.classList.remove("header-pinned", "header-hidden");
+    } else if (delta > 6 && currentScrollY > 70) {
+      if (siteHeaderEl.classList.contains("header-pinned")) {
+        siteHeaderEl.classList.remove("header-pinned");
+        siteHeaderEl.classList.add("header-hidden");
+        closeMobileMenu();
+      } else if (!siteHeaderEl.classList.contains("header-hidden")) {
+        siteHeaderEl.classList.add("header-hidden");
+      }
+    } else if (delta < -6 && currentScrollY > 70) {
+      siteHeaderEl.classList.remove("header-hidden");
+      siteHeaderEl.classList.add("header-pinned");
+    }
+
+    lastScrollY = currentScrollY;
+    scrollTicking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(handleSmartHeader);
+      scrollTicking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768 && siteHeaderEl) {
+      siteHeaderEl.classList.remove("header-pinned", "header-hidden");
+      closeMobileMenu();
+    }
+    document.querySelectorAll('textarea[data-key="notes"]').forEach(autoResizeTextarea);
+  });
+
+  $("#lightboxView").onclick = () => { $("#lightboxView").style.display = "none"; };
+
+  function renderAllViews() {
+    if (typeof updateWeekStripStatus === "function") updateWeekStripStatus();
+    if (typeof updateWeekDeltaMeta === "function") updateWeekDeltaMeta();
+    if (typeof renderHero === "function") renderHero();
+    if (typeof renderProgressTab === "function") renderProgressTab();
+
+    // Dynamická aktualizácia tréningových kariet v otvorenom týždni bez straty fokusu
+    const currentW = (T && T.weeks) ? T.weeks[currentWeekIdx] : null;
+    if (currentW && currentW.workouts) {
+      currentW.workouts.forEach(wo => {
+        const cardEl = document.getElementById("card-" + wo.id);
+        if (!cardEl) return;
+        const l = logs[wo.id] || {};
+        cardEl.querySelectorAll('[data-key="done"]').forEach(chk => { chk.checked = !!l.done; });
+        cardEl.querySelectorAll('.custom-checkbox-wrap').forEach(wrap => { wrap.classList.toggle('checked', !!l.done); });
+        cardEl.classList.toggle("done", !!l.done);
+
+        const kmInput = cardEl.querySelector('[data-key="km"]');
+        if (kmInput && document.activeElement !== kmInput && l.km !== undefined) kmInput.value = l.km;
+
+        const timeInput = cardEl.querySelector('[data-key="time"]');
+        if (timeInput && document.activeElement !== timeInput && l.time !== undefined) timeInput.value = l.time;
+
+        const rpeInput = cardEl.querySelector('[data-key="rpe"]');
+        if (rpeInput && document.activeElement !== rpeInput && l.rpe !== undefined) rpeInput.value = l.rpe || "";
+
+        const notesInput = cardEl.querySelector('textarea[data-key="notes"]');
+        if (notesInput && document.activeElement !== notesInput && l.notes !== undefined) {
+          notesInput.value = l.notes || "";
+          autoResizeTextarea(notesInput);
+        }
+
+        const paceEl = cardEl.querySelector("[data-calc-pace]");
+        if (paceEl) paceEl.textContent = fmtPace(parseTime(l.time), parseFloat(l.km));
+
+        if (l.shots && l.shots.length) {
+          loadSavedShots(wo.id, l.shots);
+        }
+      });
+    }
+  }
+
+  function renderAll() {
+    renderHero();
+    renderWeekPlan();
+    renderLibraryTab();
+    renderProgressTab();
+    syncWithCloud();
+  }
+
+  DB.open().then(renderAll);
+})();
+</script>
+</body>
+</html>
